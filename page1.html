@@ -1134,18 +1134,12 @@
       btn.disabled = true;
       btn.textContent = 'Loading...';
 
-      // Store in localStorage for page 2 prefill
+      // Store in localStorage for page 2 prefill + later sheet submission
       localStorage.setItem('p1_name', name);
       localStorage.setItem('p1_email', email);
 
-      // POST to Google Sheets API
-      fetch('/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email })
-      }).catch(function() {}).finally(function() {
-        window.location.href = 'page2.html';
-      });
+      // Navigate to quiz — sheet submission happens on page 2 once phone is collected
+      window.location.href = 'page2.html';
     }
 
     function submitOptin() {

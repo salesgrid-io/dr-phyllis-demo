@@ -1136,6 +1136,13 @@
       // POST to placeholder webhook — swap URL before launch
       // fetch('https://webhook.placeholder/lead-magnet', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) }).catch(function(){});
 
+      // Submit to Google Sheets with full data (name + email collected on page 1, phone collected here)
+      fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, phone: phone })
+      }).catch(function() {});
+
       // Save results to localStorage for page 3
       localStorage.setItem('quiz_primary', primary);
       localStorage.setItem('quiz_secondary', secondary);

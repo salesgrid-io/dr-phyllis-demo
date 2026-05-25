@@ -9,6 +9,7 @@
     { "src": "/", "dest": "/page1.html" },
     { "src": "/page1", "dest": "/page1.html" },
     { "src": "/page2", "dest": "/page2.html" },
+    { "src": "/page3", "dest": "/page3.html" },
     { "src": "/(.*)", "dest": "/$1" }
   ]
 }

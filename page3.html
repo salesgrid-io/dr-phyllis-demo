@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Genetic Avatar Results — Dr. Phyllis Pobee, MD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F4ECDF;
+      --mauve: #7A3B47;
+      --mauve-light: rgba(122,59,71,0.08);
+      --charcoal: #1A1A1A;
+      --teal-cta: #2E8B7D;
+      --teal-dark: #236B5E;
+      --gold: #B8956A;
+      --gold-light: rgba(184,149,106,0.18);
+      --text: #2A2A2A;
+      --text-muted: #6B5B4E;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ══════════════════════════════════════
+       LOADING SCREEN
+    ══════════════════════════════════════ */
+    #loading-screen {
+      position: fixed;
+      inset: 0;
+      background: var(--charcoal);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 24px;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    #loading-screen.exit {
+      opacity: 0;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+
+    .loading-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: rgba(244,236,223,0.5);
+      letter-spacing: 0.12em;
+      margin-bottom: 56px;
+    }
+    .loading-logo span { color: rgba(184,149,106,0.7); }
+
+    /* DNA Helix Animation */
+    .dna-wrap {
+      position: relative;
+      width: 60px;
+      height: 120px;
+      margin-bottom: 48px;
+    }
+    .dna-strand {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .dna-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    /* Strand A — mauve */
+    .dna-dot.a { background: var(--mauve); animation: dnaA 1.6s ease-in-out infinite; }
+    /* Strand B — gold */
+    .dna-dot.b { background: var(--gold); animation: dnaB 1.6s ease-in-out infinite; }
+
+    @keyframes dnaA {
+      0%   { top: 0%;   transform: translateX(calc(-50% + 22px)); opacity: 1; }
+      25%  { top: 25%;  transform: translateX(calc(-50% + 0px));  opacity: 0.5; }
+      50%  { top: 50%;  transform: translateX(calc(-50% - 22px)); opacity: 1; }
+      75%  { top: 75%;  transform: translateX(calc(-50% + 0px));  opacity: 0.5; }
+      100% { top: 100%; transform: translateX(calc(-50% + 22px)); opacity: 1; }
+    }
+    @keyframes dnaB {
+      0%   { top: 0%;   transform: translateX(calc(-50% - 22px)); opacity: 1; }
+      25%  { top: 25%;  transform: translateX(calc(-50% + 0px));  opacity: 0.5; }
+      50%  { top: 50%;  transform: translateX(calc(-50% + 22px)); opacity: 1; }
+      75%  { top: 75%;  transform: translateX(calc(-50% + 0px));  opacity: 0.5; }
+      100% { top: 100%; transform: translateX(calc(-50% - 22px)); opacity: 1; }
+    }
+
+    /* Second pair offset by 0.8s */
+    .dna-dot.a2 { background: var(--mauve); opacity: 0.5; animation: dnaA 1.6s ease-in-out 0.4s infinite; }
+    .dna-dot.b2 { background: var(--gold); opacity: 0.5; animation: dnaB 1.6s ease-in-out 0.4s infinite; }
+    .dna-dot.a3 { background: var(--mauve); opacity: 0.3; animation: dnaA 1.6s ease-in-out 0.8s infinite; }
+    .dna-dot.b3 { background: var(--gold); opacity: 0.3; animation: dnaB 1.6s ease-in-out 0.8s infinite; }
+
+    /* Connecting rungs */
+    .dna-rung {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, var(--mauve), var(--gold));
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.2;
+      animation: rungPulse 1.6s ease-in-out infinite;
+    }
+    .dna-rung:nth-child(1) { top: 0%;   width: 44px; animation-delay: 0s; }
+    .dna-rung:nth-child(2) { top: 25%;  width: 4px;  animation-delay: 0.4s; }
+    .dna-rung:nth-child(3) { top: 50%;  width: 44px; animation-delay: 0.8s; }
+    .dna-rung:nth-child(4) { top: 75%;  width: 4px;  animation-delay: 1.2s; }
+    .dna-rung:nth-child(5) { top: 100%; width: 44px; animation-delay: 0s; }
+    @keyframes rungPulse {
+      0%, 100% { opacity: 0.15; }
+      50%       { opacity: 0.45; }
+    }
+
+    .loading-label {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--cream);
+      text-align: center;
+      margin-bottom: 8px;
+      min-height: 32px;
+      transition: opacity 0.35s ease;
+    }
+    .loading-sublabel {
+      font-size: 13px;
+      color: rgba(244,236,223,0.4);
+      text-align: center;
+      margin-bottom: 40px;
+      letter-spacing: 0.06em;
+    }
+
+    /* Loading progress bar */
+    .loading-bar-wrap {
+      width: 280px;
+      max-width: 90vw;
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .loading-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--mauve), var(--gold));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+    .loading-pct {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+
+    /* ══════════════════════════════════════
+       RESULTS PAGE
+    ══════════════════════════════════════ */
+    #results-page {
+      display: none;
+      opacity: 0;
+      background: var(--cream);
+      transition: opacity 0.7s ease;
+    }
+    #results-page.visible { opacity: 1; }
+
+    /* Header */
+    .site-header {
+      background: var(--cream);
+      border-bottom: 1px solid rgba(184,149,106,0.25);
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .site-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--charcoal);
+    }
+    .site-logo span { color: var(--mauve); }
+    .results-badge-header {
+      background: var(--mauve-light);
+      border: 1px solid rgba(122,59,71,0.25);
+      color: var(--mauve);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* Hero results section */
+    .results-hero {
+      background: linear-gradient(160deg, var(--mauve) 0%, #4e2230 100%);
+      padding: 72px 5% 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .results-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+    }
+    .results-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(184,149,106,0.07);
+    }
+    .results-hero-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .results-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(244,236,223,0.55);
+      margin-bottom: 12px;
+    }
+    .results-hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(14px, 2vw, 18px);
+      font-weight: 400;
+      color: rgba(244,236,223,0.7);
+      margin-bottom: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .avatar-name-display {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(44px, 7vw, 72px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .avatar-pill {
+      display: inline-block;
+      background: rgba(184,149,106,0.2);
+      border: 1px solid rgba(184,149,106,0.4);
+      color: var(--gold);
+      padding: 8px 22px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    .score-bars {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .score-bar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+    .score-bar-track {
+      width: 36px;
+      height: 48px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+    .score-bar-fill {
+      width: 100%;
+      background: linear-gradient(to top, var(--gold), rgba(184,149,106,0.4));
+      border-radius: 3px;
+      transition: height 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      height: 0%;
+    }
+    .score-bar-fill.primary-fill {
+      background: linear-gradient(to top, white, rgba(255,255,255,0.5));
+    }
+    .score-bar-label {
+      font-size: 9px;
+      color: rgba(244,236,223,0.5);
+      text-align: center;
+      letter-spacing: 0.04em;
+      max-width: 40px;
+      line-height: 1.3;
+    }
+
+    /* Results body */
+    .results-body {
+      padding: 0 5% 80px;
+    }
+    .results-inner { max-width: 760px; margin: 0 auto; }
+
+    /* Avatar description card */
+    .avatar-desc-card {
+      background: white;
+      border: 1px solid rgba(184,149,106,0.25);
+      border-radius: 4px;
+      padding: 40px;
+      margin: 48px 0 24px;
+      position: relative;
+    }
+    .avatar-desc-card .avatar-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--mauve-light);
+      border: 1px solid rgba(122,59,71,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .avatar-icon-glyph {
+      font-size: 20px;
+    }
+    .avatar-desc-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 14px;
+    }
+    .avatar-desc-card p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+
+    /* Secondary avatar */
+    .secondary-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--cream);
+      border: 1px solid rgba(184,149,106,0.2);
+      border-radius: 4px;
+      padding: 16px 20px;
+      margin-bottom: 32px;
+    }
+    .secondary-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .secondary-name {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--mauve);
+    }
+    .secondary-note { font-size: 13px; color: var(--text-muted); }
+
+    /* Callout */
+    .callout-box {
+      border-left: 4px solid var(--mauve);
+      background: var(--mauve-light);
+      border-radius: 0 4px 4px 0;
+      padding: 22px 26px;
+      margin-bottom: 40px;
+    }
+    .callout-box p {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--charcoal);
+    }
+
+    /* Protocol list */
+    .protocol-heading {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mauve);
+      margin-bottom: 18px;
+    }
+    .protocol-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 56px; }
+    .protocol-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.6;
+      background: white;
+      border: 1px solid rgba(184,149,106,0.2);
+      border-radius: 4px;
+      padding: 16px 18px;
+    }
+    .protocol-num {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 24px;
+    }
+
+    /* Divider with label */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 48px 0;
+    }
+    .section-divider::before, .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(184,149,106,0.25);
+    }
+    .section-divider span {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ── CALENDLY CTA CARD ── */
+    .cta-card {
+      background: var(--charcoal);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .cta-card-top {
+      padding: 48px 48px 40px;
+      text-align: center;
+      position: relative;
+    }
+    .cta-card-top::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center top, rgba(122,59,71,0.25) 0%, transparent 70%);
+    }
+    .cta-card-top > * { position: relative; z-index: 1; }
+    .cta-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+    .cta-card h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .cta-card h2 em { font-style: italic; color: var(--gold); }
+    .cta-sub {
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(244,236,223,0.6);
+      max-width: 480px;
+      margin: 0 auto 36px;
+    }
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(244,236,223,0.7);
+      font-weight: 500;
+    }
+    .trust-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(46,139,125,0.3);
+      border: 1px solid rgba(46,139,125,0.5);
+      color: var(--teal-cta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+    .book-btn {
+      display: inline-block;
+      padding: 18px 48px;
+      background: var(--teal-cta);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 20px rgba(46,139,125,0.3);
+    }
+    .book-btn:hover {
+      background: var(--teal-dark);
+      transform: translateY(-1px);
+    }
+    .cta-card-bottom {
+      background: rgba(0,0,0,0.2);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .cta-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+    }
+    /* PLACEHOLDER notice for dev */
+    .dev-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.15);
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* Urgency strip */
+    .urgency-strip {
+      background: var(--mauve);
+      padding: 24px 5%;
+      margin-bottom: 0;
+    }
+    .urgency-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .urgency-text {
+      font-size: 14px;
+      color: rgba(244,236,223,0.85);
+      line-height: 1.5;
+    }
+    .urgency-text strong { color: white; }
+    .urgency-cta {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--gold);
+      color: var(--charcoal);
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .urgency-cta:hover { opacity: 0.88; }
+
+    /* Footer */
+    footer {
+      background: var(--charcoal);
+      padding: 36px 5%;
+    }
+    .footer-inner { max-width: 760px; margin: 0 auto; }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-logo { font-family: 'Fraunces', serif; font-size: 15px; color: rgba(255,255,255,0.6); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; }
+    .footer-disclaimer { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,0.25); }
+
+    /* Fade in helper */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .results-hero { padding: 56px 5% 60px; }
+      .avatar-desc-card { padding: 28px 24px; }
+      .cta-card-top { padding: 36px 24px 28px; }
+      .cta-card-bottom { padding: 16px 24px; }
+      .trust-row { gap: 14px; }
+      .urgency-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       LOADING SCREEN
+  ══════════════════════════════════════ -->
+  <div id="loading-screen">
+    <div class="loading-logo">Dr. <span>Phyllis</span> Pobee, MD &mdash; GeneLean360</div>
+
+    <div class="dna-wrap">
+      <!-- Rungs -->
+      <div class="dna-rung"></div>
+      <div class="dna-rung"></div>
+      <div class="dna-rung"></div>
+      <div class="dna-rung"></div>
+      <div class="dna-rung"></div>
+      <!-- Strand A dots -->
+      <div class="dna-dot a"></div>
+      <div class="dna-dot a2"></div>
+      <div class="dna-dot a3"></div>
+      <!-- Strand B dots -->
+      <div class="dna-dot b"></div>
+      <div class="dna-dot b2"></div>
+      <div class="dna-dot b3"></div>
+    </div>
+
+    <div class="loading-label" id="loading-label">Mapping your genetic profile...</div>
+    <div class="loading-sublabel">Analyzing 250+ biological markers</div>
+
+    <div class="loading-bar-wrap">
+      <div class="loading-bar-fill" id="loading-bar"></div>
+    </div>
+    <div class="loading-pct" id="loading-pct">0%</div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       RESULTS PAGE
+  ══════════════════════════════════════ -->
+  <div id="results-page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <div class="site-logo">Dr. <span>Phyllis</span> Pobee, MD</div>
+      <div class="results-badge-header">Your Results Are Ready</div>
+    </header>
+
+    <!-- HERO -->
+    <div class="results-hero">
+      <div class="results-hero-inner">
+        <p class="results-eyebrow">Genetic Avatar Assessment — Complete</p>
+        <h1>Your Primary Genetic Avatar Is</h1>
+        <span class="avatar-name-display" id="hero-avatar-name">Cortisol Carrier</span>
+        <div class="avatar-pill" id="hero-avatar-pill">Primary Avatar Identified</div>
+
+        <!-- Score bars — filled by JS -->
+        <div class="score-bars" id="score-bars"></div>
+      </div>
+    </div>
+
+    <!-- URGENCY STRIP -->
+    <div class="urgency-strip">
+      <div class="urgency-inner">
+        <p class="urgency-text"><strong>Your results are ready.</strong> Dr. Phyllis has limited sessions available this week for new avatar assessments.</p>
+        <!-- PLACEHOLDER: Replace href with real Calendly link before launch -->
+        <a href="https://calendly.com/test-placeholder/precision-health-session" class="urgency-cta" target="_blank">Book My Session &rarr;</a>
+      </div>
+    </div>
+
+    <!-- RESULTS BODY -->
+    <div class="results-body">
+      <div class="results-inner">
+
+        <!-- Avatar description card -->
+        <div class="avatar-desc-card fade-up">
+          <div class="avatar-icon">
+            <span class="avatar-icon-glyph" id="avatar-icon-glyph">🧬</span>
+          </div>
+          <h3 id="avatar-desc-heading">What this means for your biology</h3>
+          <p id="avatar-desc-text"></p>
+        </div>
+
+        <!-- Secondary avatar -->
+        <div class="secondary-row fade-up">
+          <span class="secondary-label">Secondary Avatar</span>
+          <span class="secondary-name" id="secondary-name-display"></span>
+          <span class="secondary-note" id="secondary-note-display"></span>
+        </div>
+
+        <!-- Callout -->
+        <div class="callout-box fade-up">
+          <p id="callout-text"></p>
+        </div>
+
+        <!-- Protocol -->
+        <p class="protocol-heading fade-up">What your 90-day protocol prioritizes:</p>
+        <ul class="protocol-list fade-up" id="protocol-list"></ul>
+
+        <div class="section-divider fade-up"><span>Your next step</span></div>
+
+        <!-- CALENDLY CTA CARD -->
+        <!-- NOTE FOR DEV: Replace all href="https://calendly.com/test-placeholder/..." with the real Calendly link before launch -->
+        <div class="cta-card fade-up">
+          <div class="cta-card-top">
+            <span class="cta-eyebrow">Ready to act on your results?</span>
+            <h2>Book Your <em>Precision Health Session</em></h2>
+            <p class="cta-sub">Dr. Phyllis personally walks you through your avatar results, your 3 genetic locks, and the exact 90-day sequence built for your biology — not someone else's.</p>
+            <div class="trust-row">
+              <span class="trust-item"><span class="trust-check">&#10003;</span> 45 minutes, one-on-one</span>
+              <span class="trust-item"><span class="trust-check">&#10003;</span> No obligation whatsoever</span>
+              <span class="trust-item"><span class="trust-check">&#10003;</span> Avatar-specific protocol</span>
+            </div>
+            <a href="https://calendly.com/test-placeholder/precision-health-session" class="book-btn" target="_blank" rel="noopener">BOOK MY SESSION &rarr;</a>
+          </div>
+          <div class="cta-card-bottom">
+            <p class="cta-note">Sessions fill quickly. Your avatar result is held for 48 hours.</p>
+          </div>
+          <p class="dev-note" style="padding:0 0 12px;text-align:center;"><!-- PLACEHOLDER: swap Calendly link before launch --></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-logo">Dr. Phyllis Pobee, MD &mdash; GeneLean360</div>
+          <div class="footer-links">
+            <a href="#">Terms</a>
+            <a href="#">Privacy Policy</a>
+          </div>
+        </div>
+        <p class="footer-disclaimer">This assessment is for educational and informational purposes only. Results vary. Always consult with a qualified healthcare professional. GeneLean360 &copy; 2026. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div><!-- /results-page -->
+
+  <script>
+    // ── AVATAR DATA ──
+    var AVATARS = {
+      'Craving Captive': {
+        icon: '🍬',
+        desc: 'Your biology is wired for intense hunger signals and carb dependency. Willpower isn\'t the issue — your leptin and ghrelin signaling creates genuine physiological hunger long after a full meal. Most diets treat this as a behavior problem. It\'s not. It\'s a wiring problem.',
+        callout: 'This is why low-calorie diets, meal plans, and "eat less move more" advice have always backfired for you. Your hunger isn\'t in your head — it\'s in your genes. Here\'s what actually works for your avatar.',
+        protocol: [
+          'Protein-first meal sequencing to blunt hunger signals before carbs hit the bloodstream',
+          'Strategic carb cycling timed to your cortisol rhythm — not generic "low carb" or elimination',
+          'Targeted supplementation supporting leptin sensitivity specific to the Craving Captive profile'
+        ],
+        secondaryNote: 'compounds how hunger signals compete with energy production in your profile'
+      },
+      'Cortisol Carrier': {
+        icon: '⚡',
+        desc: 'Chronic stress and elevated cortisol are directly instructing your body to store fat in the abdominal region. Exercise at the wrong intensity actually accelerates this — conventional high-intensity training triggers more cortisol, not less. Your avatar needs a fundamentally different approach to movement and recovery.',
+        callout: 'This combination explains why intense exercise, calorie restriction, and strict dieting have made things worse — not better. The more you push, the more your biology resists. Your protocol works with your cortisol rhythm, not against it.',
+        protocol: [
+          'Low-intensity movement protocols (zone 2 cardio, mobility, walking) that lower cortisol rather than spike it',
+          'Anti-inflammatory nutrition sequencing built specifically for the Cortisol Carrier hormonal environment',
+          'Targeted sleep and recovery architecture that resets the cortisol-fat storage feedback loop'
+        ],
+        secondaryNote: 'creates a compounding stress-hunger cycle that your primary avatar worsens'
+      },
+      'Detox Bound': {
+        icon: '🧪',
+        desc: 'Your body\'s detoxification pathways are bottlenecked — causing it to create and fill fat cells as protective storage for toxins it cannot clear through normal channels. This is why you often feel worse when you eat "clean," start a new diet, or increase exercise. You\'re mobilizing stored toxins faster than your body can clear them.',
+        callout: 'Bloating after healthy foods, brain fog, energy crashes, and stubborn weight despite doing everything right are classic Detox Bound markers. Generic diet programs don\'t address this layer at all — which is exactly why they haven\'t worked.',
+        protocol: [
+          'Phase 1, 2, and 3 liver detoxification support sequenced before any fat-loss protocol begins',
+          'Identification and elimination of specific "healthy" foods that activate your detox bottleneck',
+          'Targeted micronutrients that unblock methylation and sulfation pathways unique to your profile'
+        ],
+        secondaryNote: 'influences which toxin pathways are most congested in your specific profile'
+      },
+      'Fatigue Fighter': {
+        icon: '🔋',
+        desc: 'Your mitochondria — the cellular power plants — are underperforming, creating a cascade of low energy, poor recovery, brain fog, and weight that simply won\'t shift despite effort. Your body isn\'t lazy. It isn\'t unmotivated. It\'s running on a depleted engine, and no diet or workout program fixes a depleted engine by adding more load.',
+        callout: 'Caffeine dependency, afternoon crashes, inability to recover from workouts, and weight that won\'t move despite "doing everything right" are textbook Fatigue Fighter symptoms. The engine needs rebuilding before any weight protocol can work.',
+        protocol: [
+          'Mitochondrial support nutrition focused on CoQ10 precursors, B-vitamin cofactors, and electron transport chain optimization',
+          'Graduated movement protocols that rebuild cellular energy capacity rather than deplete it further',
+          'Circadian rhythm alignment strategies to maximize your natural energy production and repair windows'
+        ],
+        secondaryNote: 'compounds the cellular energy deficit and slows metabolic recovery'
+      },
+      'Carb Converter': {
+        icon: '🔄',
+        desc: 'Your metabolism processes carbohydrates differently — rapidly converting excess glucose into triglycerides and storing them as fat. The standard food pyramid, MyPlate guidance, and even many "healthy" diets were built for a different avatar. Keto and low-carb often fail you because they remove carbs without addressing the underlying sequencing and timing layer.',
+        callout: 'Weight that returns after every intervention — especially after stopping GLP-1 medications like Ozempic or Wegovy — is a Carb Converter signature. The medication suppressed the symptom. The missing genetic context is still there.',
+        protocol: [
+          'Carbohydrate sequencing and timing protocol calibrated to your specific insulin gene expression variants',
+          'Resistance training programming that shifts your metabolic mode from fat-storage to glucose utilization',
+          'Post-GLP-1 stabilization protocol designed for avatars who have previously used weight loss medications'
+        ],
+        secondaryNote: 'creates additional pathways for glucose-to-fat conversion in your profile'
+      }
+    };
+
+    var DEFAULT_AVATAR = 'Cortisol Carrier';
+
+    // ── LOADING ANIMATION ──
+    var LOADING_MESSAGES = [
+      'Mapping your genetic profile...',
+      'Analyzing hunger &amp; cortisol patterns...',
+      'Cross-referencing 250+ biological markers...',
+      'Identifying your primary avatar...',
+      'Finalizing your results...'
+    ];
+
+    var currentMsg = 0;
+    var targetPct = 0;
+    var currentPct = 0;
+    var loadingInterval;
+    var msgInterval;
+
+    function startLoading() {
+      // Progress bar animation — ~3 seconds total
+      var steps = [
+        { pct: 18, delay: 300 },
+        { pct: 35, delay: 700 },
+        { pct: 52, delay: 1100 },
+        { pct: 71, delay: 1600 },
+        { pct: 88, delay: 2100 },
+        { pct: 100, delay: 2700 }
+      ];
+
+      steps.forEach(function(step) {
+        setTimeout(function() {
+          animateTo(step.pct);
+        }, step.delay);
+      });
+
+      // Message cycling
+      msgInterval = setInterval(function() {
+        currentMsg = (currentMsg + 1) % LOADING_MESSAGES.length;
+        var label = document.getElementById('loading-label');
+        label.style.opacity = '0';
+        setTimeout(function() {
+          label.innerHTML = LOADING_MESSAGES[currentMsg];
+          label.style.opacity = '1';
+        }, 180);
+      }, 600);
+
+      // Transition to results at 3.2s
+      setTimeout(revealResults, 3200);
+    }
+
+    function animateTo(pct) {
+      var bar = document.getElementById('loading-bar');
+      var pctLabel = document.getElementById('loading-pct');
+      bar.style.width = pct + '%';
+      pctLabel.textContent = pct + '%';
+    }
+
+    function revealResults() {
+      clearInterval(msgInterval);
+      animateTo(100);
+
+      setTimeout(function() {
+        var loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.classList.add('exit');
+
+        var resultsPage = document.getElementById('results-page');
+        resultsPage.style.display = 'block';
+
+        setTimeout(function() {
+          resultsPage.classList.add('visible');
+          loadingScreen.style.display = 'none';
+
+          // Animate score bars
+          setTimeout(animateScoreBars, 400);
+
+          // Fade-up observer
+          var obs = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+              if (e.isIntersecting) { e.target.classList.add('visible'); }
+            });
+          }, { threshold: 0.12 });
+          document.querySelectorAll('.fade-up').forEach(function(el) { obs.observe(el); });
+        }, 100);
+      }, 400);
+    }
+
+    // ── POPULATE RESULTS ──
+    function populateResults() {
+      var primary = localStorage.getItem('quiz_primary') || DEFAULT_AVATAR;
+      var secondary = localStorage.getItem('quiz_secondary') || 'Fatigue Fighter';
+      var scores = JSON.parse(localStorage.getItem('quiz_scores') || '{}');
+
+      var pData = AVATARS[primary] || AVATARS[DEFAULT_AVATAR];
+      var sData = AVATARS[secondary] || AVATARS['Fatigue Fighter'];
+
+      // Hero
+      document.getElementById('hero-avatar-name').textContent = primary;
+      document.getElementById('hero-avatar-pill').textContent = 'Primary Avatar — ' + primary;
+
+      // Build score bars
+      buildScoreBars(scores, primary);
+
+      // Avatar card
+      document.getElementById('avatar-icon-glyph').textContent = pData.icon;
+      document.getElementById('avatar-desc-heading').textContent = 'You are: ' + primary;
+      document.getElementById('avatar-desc-text').textContent = pData.desc;
+
+      // Secondary
+      document.getElementById('secondary-name-display').textContent = secondary;
+      document.getElementById('secondary-note-display').textContent = '— ' + (pData.secondaryNote || 'shapes your secondary biological response');
+
+      // Callout
+      document.getElementById('callout-text').textContent = pData.callout;
+
+      // Protocol
+      var list = document.getElementById('protocol-list');
+      list.innerHTML = '';
+      pData.protocol.forEach(function(item, i) {
+        var li = document.createElement('li');
+        li.innerHTML = '<div class="protocol-num">0' + (i + 1) + '</div><span>' + item + '</span>';
+        list.appendChild(li);
+      });
+    }
+
+    function buildScoreBars(scores, primary) {
+      var container = document.getElementById('score-bars');
+      if (!scores || Object.keys(scores).length === 0) return;
+
+      var maxScore = Math.max.apply(null, Object.values(scores).map(Number)) || 1;
+
+      Object.entries(scores).forEach(function(entry) {
+        var name = entry[0];
+        var score = entry[1];
+        var pct = Math.round((score / maxScore) * 100);
+        var isPrimary = name === primary;
+
+        var shortName = name.split(' ')[0]; // just first word
+
+        var item = document.createElement('div');
+        item.className = 'score-bar-item';
+        item.innerHTML = '<div class="score-bar-track">' +
+          '<div class="score-bar-fill ' + (isPrimary ? 'primary-fill' : '') + '" id="bar-' + name.replace(/\s/g,'') + '" style="height:0%"></div>' +
+          '</div>' +
+          '<div class="score-bar-label">' + shortName + '</div>';
+        container.appendChild(item);
+      });
+    }
+
+    function animateScoreBars() {
+      var scores = JSON.parse(localStorage.getItem('quiz_scores') || '{}');
+      var maxScore = Math.max.apply(null, Object.values(scores).map(Number)) || 1;
+
+      Object.entries(scores).forEach(function(entry) {
+        var name = entry[0];
+        var score = entry[1];
+        var pct = Math.max(8, Math.round((score / maxScore) * 100));
+        var bar = document.getElementById('bar-' + name.replace(/\s/g,''));
+        if (bar) bar.style.height = pct + '%';
+      });
+    }
+
+    // ── INIT ──
+    populateResults();
+    startLoading();
+  </script>
+</body>
+</html>

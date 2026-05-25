@@ -875,46 +875,6 @@
     </div>
   </div>
 
-  <!-- RESULTS PANEL -->
-  <div id="results-panel">
-    <div class="results-inner">
-
-      <div class="results-hero">
-        <p class="results-eyebrow">Your Genetic Avatar Assessment Results</p>
-        <h2>Your primary avatar:<br><em id="res-primary-name">Cortisol Carrier</em></h2>
-        <div class="avatar-badge" id="res-primary-badge">Primary Avatar</div>
-      </div>
-
-      <p class="results-desc" id="res-primary-desc"></p>
-
-      <div class="secondary-avatar">
-        <strong>Your secondary avatar: <span id="res-secondary-name"></span></strong>
-        &mdash; <span id="res-secondary-desc"></span>
-      </div>
-
-      <div class="callout-box">
-        <p id="res-callout"></p>
-      </div>
-
-      <p style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:16px;letter-spacing:0.06em;text-transform:uppercase;">What your protocol would prioritize:</p>
-      <ul class="protocol-list" id="res-protocol"></ul>
-
-      <!-- CALENDLY CTA CARD -->
-      <!-- NOTE FOR DEV: Replace the href on .book-btn with actual Calendly link before launch -->
-      <div class="cta-card">
-        <h3>Book Your Precision Health Session</h3>
-        <p>Dr. Phyllis personally walks you through your avatar results, your 3 genetic locks, and the exact 90-day sequence built for your biology.</p>
-        <div class="trust-row">
-          <span class="trust-item">&#10003; 45 minutes</span>
-          <span class="trust-item">&#10003; One-on-one</span>
-          <span class="trust-item">&#10003; No obligation</span>
-        </div>
-        <a href="https://calendly.com/test-placeholder/precision-health-session" class="book-btn" target="_blank" rel="noopener">BOOK MY SESSION &rarr;</a>
-        <p class="calendly-note"><!-- PLACEHOLDER: Replace Calendly link above before launch --></p>
-      </div>
-    </div>
-  </div>
-
   <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
@@ -1176,42 +1136,21 @@
       // POST to placeholder webhook — swap URL before launch
       // fetch('https://webhook.placeholder/lead-magnet', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) }).catch(function(){});
 
-      // Show results
-      setTimeout(function() { showResults(primary, secondary); }, 700);
-    }
+      // Save results to localStorage for page 3
+      localStorage.setItem('quiz_primary', primary);
+      localStorage.setItem('quiz_secondary', secondary);
+      localStorage.setItem('quiz_name', name);
+      localStorage.setItem('quiz_email', email);
+      localStorage.setItem('quiz_phone', phone);
+      localStorage.setItem('quiz_scores', JSON.stringify(scores));
+      localStorage.setItem('quiz_readiness', s7);
 
-    function showResults(primary, secondary) {
-      var avatarData = AVATARS[primary] || AVATARS[DEFAULT_AVATAR];
-      var secondaryData = AVATARS[secondary] || AVATARS['Fatigue Fighter'];
-
-      document.getElementById('res-primary-name').textContent = primary;
-      document.getElementById('res-primary-badge').textContent = 'Primary Avatar — ' + primary;
-      document.getElementById('res-primary-desc').textContent = avatarData.desc;
-      document.getElementById('res-secondary-name').textContent = secondary;
-      document.getElementById('res-secondary-desc').textContent = 'influences how your primary avatar expresses itself';
-      document.getElementById('res-callout').textContent = avatarData.callout;
-
-      var protocolList = document.getElementById('res-protocol');
-      protocolList.innerHTML = '';
-      avatarData.protocol.forEach(function(item) {
-        var li = document.createElement('li');
-        li.innerHTML = '<div class="protocol-dot"></div><span>' + item + '</span>';
-        protocolList.appendChild(li);
-      });
-
-      // Hide quiz, show results
-      document.getElementById('quiz-body').style.display = 'none';
-      var results = document.getElementById('results-panel');
-      results.style.display = 'block';
-      results.style.opacity = '0';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Fade out page then navigate to page 3
+      document.body.style.transition = 'opacity 0.5s ease';
+      document.body.style.opacity = '0';
       setTimeout(function() {
-        results.style.transition = 'opacity 0.5s ease';
-        results.style.opacity = '1';
-      }, 200);
-
-      document.getElementById('progress-fill').style.width = '100%';
-      document.getElementById('progress-pct').textContent = '100%';
+        window.location.href = 'page3.html';
+      }, 500);
     }
   </script>
 </body>

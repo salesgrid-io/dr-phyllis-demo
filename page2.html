@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genetic Avatar Assessment — Dr. Phyllis Pobee, MD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F4ECDF;
+      --cream-dark: #EAE0CF;
+      --mauve: #7A3B47;
+      --mauve-light: rgba(122,59,71,0.08);
+      --mauve-mid: rgba(122,59,71,0.2);
+      --charcoal: #1A1A1A;
+      --teal-cta: #2E8B7D;
+      --teal-dark: #236B5E;
+      --gold: #B8956A;
+      --text: #2A2A2A;
+      --text-muted: #6B5B4E;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-bar-wrap {
+      background: var(--charcoal);
+      padding: 14px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .progress-bar-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .progress-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: rgba(244,236,223,0.6);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .progress-track {
+      flex: 1;
+      height: 3px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    .progress-pct {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      white-space: nowrap;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--cream);
+      border-bottom: 1px solid rgba(184,149,106,0.25);
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--charcoal);
+    }
+    .site-logo span { color: var(--mauve); }
+
+    /* ── QUIZ INTRO ── */
+    .quiz-intro {
+      background: var(--cream);
+      padding: 64px 5% 56px;
+      border-bottom: 1px solid rgba(184,149,106,0.2);
+    }
+    .quiz-intro-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mauve);
+      margin-bottom: 16px;
+    }
+    .quiz-intro h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+    .quiz-intro h1 em { font-style: italic; color: var(--mauve); }
+    .quiz-intro p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+
+    /* ── QUIZ BODY ── */
+    .quiz-body {
+      padding: 0 5% 80px;
+    }
+    .quiz-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION BLOCK ── */
+    .q-section {
+      padding: 48px 0;
+      border-bottom: 1px solid rgba(184,149,106,0.18);
+    }
+    .q-section:last-child { border-bottom: none; }
+    .q-section-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 6px;
+    }
+    .q-section-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* ── SLIDER QUESTIONS ── */
+    .slider-question { margin-bottom: 32px; }
+    .slider-question:last-child { margin-bottom: 0; }
+    .slider-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .slider-end {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+      width: 100px;
+      line-height: 1.3;
+    }
+    .slider-end.right { text-align: right; }
+    .slider-wrap { flex: 1; position: relative; }
+    input[type="range"] {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 4px;
+      background: #ddd3c4;
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--mauve);
+      cursor: pointer;
+      border: 3px solid white;
+      box-shadow: 0 1px 6px rgba(122,59,71,0.35);
+      transition: transform 0.15s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--mauve);
+      cursor: pointer;
+      border: 3px solid white;
+      box-shadow: 0 1px 6px rgba(122,59,71,0.35);
+    }
+    .slider-value {
+      display: inline-block;
+      background: var(--mauve);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── CHECKBOX GROUP ── */
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid #ddd3c4;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+      background: white;
+    }
+    .checkbox-item:hover { border-color: var(--mauve); }
+    .checkbox-item.checked {
+      border-color: var(--mauve);
+      background: var(--mauve-light);
+    }
+    .checkbox-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #c4b5a8;
+      border-radius: 3px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .checkbox-item.checked .checkbox-box {
+      border-color: var(--mauve);
+      background: var(--mauve);
+      color: white;
+      font-size: 11px;
+    }
+    .checkbox-text { font-size: 14px; color: var(--text); line-height: 1.4; }
+
+    /* ── RADIO GROUP ── */
+    .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 1px solid #ddd3c4;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+      background: white;
+    }
+    .radio-item:hover { border-color: var(--mauve); }
+    .radio-item.selected {
+      border-color: var(--mauve);
+      background: var(--mauve-light);
+    }
+    .radio-dot {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #c4b5a8;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .radio-item.selected .radio-dot {
+      border-color: var(--mauve);
+    }
+    .radio-dot::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--mauve);
+      display: none;
+    }
+    .radio-item.selected .radio-dot::after { display: block; }
+    .radio-text { font-size: 15px; color: var(--text); }
+
+    /* ── CONTACT FIELDS ── */
+    .contact-field { margin-bottom: 14px; }
+    .contact-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .contact-field input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid #ddd3c4;
+      border-radius: 4px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: white;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-field input:focus { border-color: var(--mauve); }
+    .contact-field input::placeholder { color: #b0a090; }
+    .contact-field input.field-err { border-color: #c0392b; }
+    .field-error-msg { font-size: 11px; color: #c0392b; margin-top: 5px; display: none; }
+    .field-error-msg.show { display: block; }
+
+    /* ── SUBMIT BTN ── */
+    .quiz-submit-wrap { padding: 48px 0 0; }
+    .quiz-submit-btn {
+      width: 100%;
+      padding: 18px 24px;
+      background: var(--teal-cta);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .quiz-submit-btn:hover { background: var(--teal-dark); }
+    .quiz-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .quiz-submit-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    /* ── RESULTS PANEL ── */
+    #results-panel {
+      display: none;
+      background: var(--cream);
+      padding: 0 5% 80px;
+    }
+    .results-inner { max-width: 760px; margin: 0 auto; }
+
+    .results-hero {
+      background: var(--mauve);
+      border-radius: 0 0 4px 4px;
+      padding: 48px 40px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .results-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(244,236,223,0.6);
+      margin-bottom: 12px;
+    }
+    .results-hero h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .results-hero h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .avatar-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 6px 20px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .results-desc {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .secondary-avatar {
+      font-size: 14px;
+      color: var(--text-muted);
+      background: white;
+      border: 1px solid rgba(184,149,106,0.3);
+      border-radius: 4px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+    }
+    .secondary-avatar strong { color: var(--mauve); }
+    .callout-box {
+      background: rgba(122,59,71,0.07);
+      border: 1px solid rgba(122,59,71,0.2);
+      border-left: 4px solid var(--mauve);
+      border-radius: 0 4px 4px 0;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .callout-box p {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--charcoal);
+    }
+    .protocol-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .protocol-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    .protocol-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    /* ── CTA CARD ── */
+    .cta-card {
+      background: var(--charcoal);
+      border-radius: 4px;
+      padding: 48px 40px;
+      text-align: center;
+    }
+    .cta-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .cta-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(244,236,223,0.65);
+      max-width: 480px;
+      margin: 0 auto 28px;
+    }
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+    .trust-item {
+      font-size: 13px;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .book-btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--teal-cta);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .book-btn:hover { background: var(--teal-dark); }
+    .calendly-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+      margin-top: 12px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 36px 5%;
+    }
+    .footer-inner { max-width: 760px; margin: 0 auto; }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; }
+    .footer-disclaimer {
+      font-size: 11px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .checkbox-group { grid-template-columns: 1fr; }
+      .slider-row { flex-direction: column; align-items: stretch; gap: 10px; }
+      .slider-end { width: auto; }
+      .slider-end.right { text-align: left; }
+      .trust-row { flex-direction: column; align-items: center; gap: 10px; }
+      .cta-card { padding: 36px 24px; }
+      .results-hero { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-inner">
+      <span class="progress-label" id="progress-step-label">Genetic Avatar Assessment</span>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <span class="progress-pct" id="progress-pct">0%</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="site-logo">Dr. <span>Phyllis</span> Pobee, MD</div>
+    <div style="font-size:11px;color:var(--text-muted);font-weight:500;letter-spacing:0.1em;text-transform:uppercase;">GeneLean360</div>
+  </header>
+
+  <!-- QUIZ INTRO -->
+  <div class="quiz-intro">
+    <div class="quiz-intro-inner">
+      <p class="eyebrow">Genetic Avatar Assessment</p>
+      <h1><em>Which of the 12 Genetic Avatars&trade;</em> is running your body?</h1>
+      <p>Answer honestly — your results determine which protocol Dr. Phyllis walks through on your call. Takes about 3 minutes.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ BODY -->
+  <div class="quiz-body" id="quiz-body">
+    <div class="quiz-inner">
+
+      <!-- SECTION 1: Hunger & Cravings -->
+      <div class="q-section" data-section="1">
+        <h3 class="q-section-title">Section 1: Hunger &amp; Cravings</h3>
+        <p class="q-section-sub">Move each slider to where you honestly land.</p>
+
+        <div class="slider-question" data-q="s1q1">
+          <div class="slider-label">After a full meal, how hungry do you still feel?</div>
+          <div class="slider-row">
+            <span class="slider-end">Never hungry</span>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="10" value="5" id="s1q1" oninput="updateSlider(this)">
+            </div>
+            <div class="slider-value" id="s1q1-val">5</div>
+            <span class="slider-end right">Always starving</span>
+          </div>
+        </div>
+
+        <div class="slider-question" data-q="s1q2">
+          <div class="slider-label">How often do you crave sugar or carbs specifically?</div>
+          <div class="slider-row">
+            <span class="slider-end">Never</span>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="10" value="5" id="s1q2" oninput="updateSlider(this)">
+            </div>
+            <div class="slider-value" id="s1q2-val">5</div>
+            <span class="slider-end right">Multiple times daily</span>
+          </div>
+        </div>
+
+        <div class="slider-question" data-q="s1q3">
+          <div class="slider-label">How intense are your cravings when they hit?</div>
+          <div class="slider-row">
+            <span class="slider-end">Mild / Ignorable</span>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="10" value="5" id="s1q3" oninput="updateSlider(this)">
+            </div>
+            <div class="slider-value" id="s1q3-val">5</div>
+            <span class="slider-end right">Uncontrollable</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: Energy & Crashes -->
+      <div class="q-section" data-section="2">
+        <h3 class="q-section-title">Section 2: Energy &amp; Crashes</h3>
+        <p class="q-section-sub">Rate your typical experience over the last 3 months.</p>
+
+        <div class="slider-question">
+          <div class="slider-label">How often do you crash after meals?</div>
+          <div class="slider-row">
+            <span class="slider-end">Never</span>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="10" value="5" id="s2q1" oninput="updateSlider(this)">
+            </div>
+            <div class="slider-value" id="s2q1-val">5</div>
+            <span class="slider-end right">Every meal</span>
+          </div>
+        </div>
+
+        <div class="slider-question">
+          <div class="slider-label">Rate your energy between 2–4pm</div>
+          <div class="slider-row">
+            <span class="slider-end">Wired &amp; focused</span>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="10" value="5" id="s2q2" oninput="updateSlider(this)">
+            </div>
+            <div class="slider-value" id="s2q2-val">5</div>
+            <span class="slider-end right">Completely wiped out</span>
+          </div>
+        </div>
+
+        <div class="slider-question">
+          <div class="slider-label">How well do you sleep through the night?</div>
+          <div class="slider-row">
+            <span class="slider-end">Perfectly</span>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="10" value="5" id="s2q3" oninput="updateSlider(this)">
+            </div>
+            <div class="slider-value" id="s2q3-val">5</div>
+            <span class="slider-end right">Wake up multiple times</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: Body Response -->
+      <div class="q-section" data-section="3">
+        <h3 class="q-section-title">Section 3: Body Response</h3>
+        <p class="q-section-sub">Which of these have you experienced in the last 12 months? Check all that apply.</p>
+        <div class="checkbox-group" id="s3-checks">
+          <label class="checkbox-item" data-val="weight-gain">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Weight gain despite eating the same</span>
+          </label>
+          <label class="checkbox-item" data-val="weight-stall">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Weight stalls after initial loss</span>
+          </label>
+          <label class="checkbox-item" data-val="belly-weight">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Belly weight that won't move</span>
+          </label>
+          <label class="checkbox-item" data-val="bloating">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Bloating after "healthy" foods</span>
+          </label>
+          <label class="checkbox-item" data-val="brain-fog">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Brain fog or memory issues</span>
+          </label>
+          <label class="checkbox-item" data-val="mood-swings">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Mood swings tied to eating</span>
+          </label>
+          <label class="checkbox-item" data-val="stubborn-weight">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Stubborn weight after pregnancy / menopause / illness</span>
+          </label>
+          <label class="checkbox-item" data-val="glp1-regain">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Weight regain after stopping Ozempic / Wegovy</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION 4: What You've Tried -->
+      <div class="q-section" data-section="4">
+        <h3 class="q-section-title">Section 4: What You've Tried</h3>
+        <p class="q-section-sub">What have you tried that didn't deliver lasting results? Check all that apply.</p>
+        <div class="checkbox-group" id="s4-checks">
+          <label class="checkbox-item" data-val="calories">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Calorie counting / macros</span>
+          </label>
+          <label class="checkbox-item" data-val="fasting">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Intermittent fasting</span>
+          </label>
+          <label class="checkbox-item" data-val="keto">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Keto / low-carb</span>
+          </label>
+          <label class="checkbox-item" data-val="hiit">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">High-intensity workouts</span>
+          </label>
+          <label class="checkbox-item" data-val="trainer">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Personal trainer</span>
+          </label>
+          <label class="checkbox-item" data-val="glp1">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Ozempic / Wegovy / Mounjaro</span>
+          </label>
+          <label class="checkbox-item" data-val="bariatric">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Bariatric surgery consult</span>
+          </label>
+          <label class="checkbox-item" data-val="dna-test">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Generic DNA test ($99 kits)</span>
+          </label>
+          <label class="checkbox-item" data-val="therapy">
+            <div class="checkbox-box"></div>
+            <span class="checkbox-text">Therapy for emotional eating</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION 5: Stress & Cortisol -->
+      <div class="q-section" data-section="5">
+        <h3 class="q-section-title">Section 5: Stress &amp; Cortisol</h3>
+        <p class="q-section-sub">Be honest — your body already knows the answer.</p>
+
+        <div class="slider-question">
+          <div class="slider-label">Current life stress level</div>
+          <div class="slider-row">
+            <span class="slider-end">Calm &amp; balanced</span>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="10" value="5" id="s5q1" oninput="updateSlider(this)">
+            </div>
+            <div class="slider-value" id="s5q1-val">5</div>
+            <span class="slider-end right">Completely maxed out</span>
+          </div>
+        </div>
+
+        <div class="slider-question">
+          <div class="slider-label">How often do you stress-eat?</div>
+          <div class="slider-row">
+            <span class="slider-end">Never</span>
+            <div class="slider-wrap">
+              <input type="range" min="1" max="10" value="5" id="s5q2" oninput="updateSlider(this)">
+            </div>
+            <div class="slider-value" id="s5q2-val">5</div>
+            <span class="slider-end right">Daily</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: Goals -->
+      <div class="q-section" data-section="6">
+        <h3 class="q-section-title">Section 6: Your Goal</h3>
+        <p class="q-section-sub">What would change the most if your weight resolved in the next 12 months?</p>
+        <div class="radio-group" id="s6-radios">
+          <label class="radio-item" data-val="confidence">
+            <div class="radio-dot"></div>
+            <span class="radio-text">Confidence and how I show up in the world</span>
+          </label>
+          <label class="radio-item" data-val="energy">
+            <div class="radio-dot"></div>
+            <span class="radio-text">Energy for my family and work</span>
+          </label>
+          <label class="radio-item" data-val="longevity">
+            <div class="radio-dot"></div>
+            <span class="radio-text">Health markers and longevity</span>
+          </label>
+          <label class="radio-item" data-val="meds">
+            <div class="radio-dot"></div>
+            <span class="radio-text">Getting off medications</span>
+          </label>
+          <label class="radio-item" data-val="all">
+            <div class="radio-dot"></div>
+            <span class="radio-text">All of the above</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION 7: Contact + Readiness -->
+      <div class="q-section" data-section="7">
+        <h3 class="q-section-title">Section 7: Contact &amp; Readiness</h3>
+        <p class="q-section-sub" style="margin-bottom:28px">Almost done. So we can send your results and schedule your session.</p>
+
+        <div class="contact-field">
+          <label for="q-name">First Name</label>
+          <input type="text" id="q-name" placeholder="Your first name" autocomplete="given-name">
+          <div class="field-error-msg" id="err-q-name">Please enter your name.</div>
+        </div>
+        <div class="contact-field">
+          <label for="q-email">Email Address</label>
+          <input type="email" id="q-email" placeholder="Your email" autocomplete="email">
+          <div class="field-error-msg" id="err-q-email">Please enter a valid email.</div>
+        </div>
+        <div class="contact-field">
+          <label for="q-phone">Phone Number <span style="color:var(--mauve)">*</span></label>
+          <input type="tel" id="q-phone" placeholder="Your phone number" autocomplete="tel">
+          <div class="field-error-msg" id="err-q-phone">Phone number is required to book your session.</div>
+        </div>
+
+        <div style="margin-top:28px">
+          <p class="q-section-sub" style="margin-bottom:16px;font-weight:500;color:var(--text)">When are you ready to start?</p>
+          <div class="radio-group" id="s7-radios">
+            <label class="radio-item" data-val="this-week">
+              <div class="radio-dot"></div>
+              <span class="radio-text">This week</span>
+            </label>
+            <label class="radio-item" data-val="this-month">
+              <div class="radio-dot"></div>
+              <span class="radio-text">This month</span>
+            </label>
+            <label class="radio-item" data-val="90-days">
+              <div class="radio-dot"></div>
+              <span class="radio-text">Next 90 days</span>
+            </label>
+            <label class="radio-item" data-val="exploring">
+              <div class="radio-dot"></div>
+              <span class="radio-text">Just exploring</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="quiz-submit-wrap">
+        <button class="quiz-submit-btn" id="quiz-submit" onclick="submitQuiz()">SEE MY AVATAR RESULTS &rarr;</button>
+        <p class="quiz-submit-note">Your results are calculated instantly. No waiting.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS PANEL -->
+  <div id="results-panel">
+    <div class="results-inner">
+
+      <div class="results-hero">
+        <p class="results-eyebrow">Your Genetic Avatar Assessment Results</p>
+        <h2>Your primary avatar:<br><em id="res-primary-name">Cortisol Carrier</em></h2>
+        <div class="avatar-badge" id="res-primary-badge">Primary Avatar</div>
+      </div>
+
+      <p class="results-desc" id="res-primary-desc"></p>
+
+      <div class="secondary-avatar">
+        <strong>Your secondary avatar: <span id="res-secondary-name"></span></strong>
+        &mdash; <span id="res-secondary-desc"></span>
+      </div>
+
+      <div class="callout-box">
+        <p id="res-callout"></p>
+      </div>
+
+      <p style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:16px;letter-spacing:0.06em;text-transform:uppercase;">What your protocol would prioritize:</p>
+      <ul class="protocol-list" id="res-protocol"></ul>
+
+      <!-- CALENDLY CTA CARD -->
+      <!-- NOTE FOR DEV: Replace the href on .book-btn with actual Calendly link before launch -->
+      <div class="cta-card">
+        <h3>Book Your Precision Health Session</h3>
+        <p>Dr. Phyllis personally walks you through your avatar results, your 3 genetic locks, and the exact 90-day sequence built for your biology.</p>
+        <div class="trust-row">
+          <span class="trust-item">&#10003; 45 minutes</span>
+          <span class="trust-item">&#10003; One-on-one</span>
+          <span class="trust-item">&#10003; No obligation</span>
+        </div>
+        <a href="https://calendly.com/test-placeholder/precision-health-session" class="book-btn" target="_blank" rel="noopener">BOOK MY SESSION &rarr;</a>
+        <p class="calendly-note"><!-- PLACEHOLDER: Replace Calendly link above before launch --></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-logo">Dr. Phyllis Pobee, MD &mdash; GeneLean360</div>
+        <div class="footer-links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <p class="footer-disclaimer">This assessment is for educational and informational purposes only. Results vary. Always consult with a qualified healthcare professional. GeneLean360 &copy; 2026. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── PRE-FILL FROM LOCALSTORAGE ──
+    (function() {
+      var name = localStorage.getItem('p1_name') || '';
+      var email = localStorage.getItem('p1_email') || '';
+      if (name) document.getElementById('q-name').value = name;
+      if (email) document.getElementById('q-email').value = email;
+    })();
+
+    // ── SLIDER LIVE UPDATE ──
+    function updateSlider(el) {
+      document.getElementById(el.id + '-val').textContent = el.value;
+      updateProgress();
+    }
+
+    // ── CHECKBOX TOGGLE ──
+    document.querySelectorAll('.checkbox-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        this.classList.toggle('checked');
+        var box = this.querySelector('.checkbox-box');
+        box.textContent = this.classList.contains('checked') ? '✓' : '';
+        updateProgress();
+      });
+    });
+
+    // ── RADIO SELECT (single per group) ──
+    document.querySelectorAll('#s6-radios .radio-item, #s7-radios .radio-item').forEach(function(item) {
+      item.addEventListener('click', function() {
+        var group = this.closest('.radio-group');
+        group.querySelectorAll('.radio-item').forEach(function(r) { r.classList.remove('selected'); });
+        this.classList.add('selected');
+        updateProgress();
+      });
+    });
+
+    // ── PROGRESS TRACKING ──
+    function updateProgress() {
+      var sliders = document.querySelectorAll('input[type="range"]');
+      var s3checked = document.querySelectorAll('#s3-checks .checked').length > 0;
+      var s4checked = document.querySelectorAll('#s4-checks .checked').length > 0;
+      var s6selected = document.querySelector('#s6-radios .selected') !== null;
+      var s7selected = document.querySelector('#s7-radios .selected') !== null;
+      var phone = document.getElementById('q-phone').value.trim().length > 0;
+
+      // 8 sliders + s3 + s4 + s6 + s7 + phone = 13 signals
+      var filled = 0;
+      sliders.forEach(function() { filled++; }); // sliders always "filled" once touched — count as baseline
+      if (s3checked) filled += 1;
+      if (s4checked) filled += 1;
+      if (s6selected) filled += 1;
+      if (s7selected) filled += 1;
+      if (phone) filled += 1;
+
+      var total = sliders.length + 5;
+      var pct = Math.round((filled / total) * 100);
+      if (pct > 100) pct = 100;
+
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('progress-pct').textContent = pct + '%';
+    }
+
+    document.getElementById('q-phone').addEventListener('input', updateProgress);
+    updateProgress();
+
+    // ── SCROLL PROGRESS SPY ──
+    window.addEventListener('scroll', function() {
+      var quizBody = document.getElementById('quiz-body');
+      if (!quizBody) return;
+      var rect = quizBody.getBoundingClientRect();
+      var total = quizBody.offsetHeight;
+      var scrolled = Math.max(0, -rect.top);
+      var pct = Math.min(100, Math.round((scrolled / total) * 100));
+      if (pct > 0) {
+        document.getElementById('progress-fill').style.width = pct + '%';
+        document.getElementById('progress-pct').textContent = pct + '%';
+      }
+    });
+
+    // ── VALIDATION ──
+    function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+    function isValidPhone(v) { return /^\d{6,15}$/.test(v.replace(/[\s\-()+.]/g, '')); }
+
+    function setErr(inputId, errId, show) {
+      var el = document.getElementById(inputId);
+      var err = document.getElementById(errId);
+      if (show) { el.classList.add('field-err'); err.classList.add('show'); }
+      else { el.classList.remove('field-err'); err.classList.remove('show'); }
+    }
+
+    ['q-name','q-email','q-phone'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', function() { setErr(id, 'err-' + id, false); });
+    });
+
+    // ── AVATAR DATA ──
+    var AVATARS = {
+      'Craving Captive': {
+        desc: 'Your biology is wired for intense hunger signals and carb dependency. Willpower isn\'t the issue — your leptin and ghrelin signaling creates genuine physiological hunger long after a full meal.',
+        callout: 'This is why low-calorie diets have always backfired. Your hunger isn\'t in your head — it\'s in your genes. Here\'s what actually works.',
+        protocol: [
+          'Protein-first meal sequencing to blunt hunger signals before carbs hit',
+          'Strategic carb cycling timed to your cortisol rhythm (not generic "low carb")',
+          'Specific supplements that support leptin sensitivity in your avatar profile'
+        ]
+      },
+      'Cortisol Carrier': {
+        desc: 'Chronic stress and high cortisol are directly instructing your body to store fat in the abdominal region. Exercise at the wrong intensity actually accelerates this — your avatar needs a fundamentally different approach to movement.',
+        callout: 'This combination explains why intense exercise and strict dieting have made your situation worse, not better. Your protocol works with your cortisol, not against it.',
+        protocol: [
+          'Low-intensity movement that lowers cortisol rather than spikes it further',
+          'Anti-inflammatory nutrition sequencing specific to the Cortisol Carrier profile',
+          'Targeted sleep and recovery protocols that reset your stress hormone cycle'
+        ]
+      },
+      'Detox Bound': {
+        desc: 'Your body\'s detoxification pathways are bottlenecked, causing it to create fat cells as protective storage for toxins it can\'t clear. Standard diets don\'t address this — which is why you often feel worse when you eat "clean."',
+        callout: 'Bloating after healthy foods, brain fog, and stubborn weight are classic Detox Bound symptoms. Your biology needs a different starting point entirely.',
+        protocol: [
+          'Phase 1/2/3 liver support sequencing before any weight-loss protocol',
+          'Elimination of specific "healthy" foods that trigger your detox bottleneck',
+          'Targeted micronutrients that unblock your methylation pathway'
+        ]
+      },
+      'Fatigue Fighter': {
+        desc: 'Your mitochondria are underperforming, creating a cascade of low energy, poor recovery, and weight that simply won\'t shift. Your body isn\'t lazy — it\'s running on a depleted engine.',
+        callout: 'This is why caffeine dependency, afternoon crashes, and weight that won\'t move despite "doing everything right" have been your experience. Your engine needs rebuilding first.',
+        protocol: [
+          'Mitochondrial support nutrition focused on CoQ10 precursors and B-vitamin cofactors',
+          'Movement protocols that rebuild cellular energy rather than deplete it further',
+          'Circadian rhythm alignment to maximize your natural energy production windows'
+        ]
+      },
+      'Carb Converter': {
+        desc: 'Your metabolism processes carbohydrates differently — rapidly converting excess into fat storage. The standard food pyramid was built for a different avatar. Keto and low-carb protocols often fail you because they miss the sequencing layer.',
+        callout: 'Weight that comes back after every intervention, especially after stopping GLP-1 medications, is a Carb Converter signature. The issue isn\'t the drug — it\'s the missing genetic context.',
+        protocol: [
+          'Carbohydrate sequencing protocol specific to your insulin gene variants',
+          'Resistance training timing that shifts your body away from fat-storage mode',
+          'Post-GLP-1 stabilization protocol if you\'ve previously used weight loss medications'
+        ]
+      }
+    };
+
+    var AVATAR_NAMES = Object.keys(AVATARS);
+    var DEFAULT_AVATAR = 'Cortisol Carrier';
+
+    // ── SCORING ENGINE ──
+    function scoreAvatars() {
+      var scores = {
+        'Craving Captive': 0,
+        'Cortisol Carrier': 0,
+        'Detox Bound': 0,
+        'Fatigue Fighter': 0,
+        'Carb Converter': 0
+      };
+
+      // Sliders S1: hunger/cravings → Craving Captive
+      var s1q1 = parseInt(document.getElementById('s1q1').value);
+      var s1q2 = parseInt(document.getElementById('s1q2').value);
+      var s1q3 = parseInt(document.getElementById('s1q3').value);
+      scores['Craving Captive'] += (s1q1 + s1q2 + s1q3);
+      scores['Fatigue Fighter'] += Math.round(s1q1 * 0.4);
+
+      // Sliders S2: energy/crashes → Fatigue Fighter
+      var s2q1 = parseInt(document.getElementById('s2q1').value);
+      var s2q2 = parseInt(document.getElementById('s2q2').value);
+      var s2q3 = parseInt(document.getElementById('s2q3').value);
+      scores['Fatigue Fighter'] += (s2q1 + s2q2 + s2q3);
+      scores['Cortisol Carrier'] += Math.round(s2q2 * 0.5);
+
+      // S3 checkboxes
+      document.querySelectorAll('#s3-checks .checked').forEach(function(item) {
+        var val = item.getAttribute('data-val');
+        if (val === 'weight-gain') { scores['Carb Converter'] += 2; scores['Cortisol Carrier'] += 1; }
+        if (val === 'weight-stall') { scores['Carb Converter'] += 2; scores['Detox Bound'] += 1; }
+        if (val === 'belly-weight') { scores['Cortisol Carrier'] += 3; }
+        if (val === 'bloating') { scores['Detox Bound'] += 3; }
+        if (val === 'brain-fog') { scores['Detox Bound'] += 2; scores['Fatigue Fighter'] += 2; }
+        if (val === 'mood-swings') { scores['Craving Captive'] += 2; scores['Cortisol Carrier'] += 1; }
+        if (val === 'stubborn-weight') { scores['Cortisol Carrier'] += 2; scores['Detox Bound'] += 1; }
+        if (val === 'glp1-regain') { scores['Carb Converter'] += 3; }
+      });
+
+      // S5: cortisol sliders
+      var s5q1 = parseInt(document.getElementById('s5q1').value);
+      var s5q2 = parseInt(document.getElementById('s5q2').value);
+      scores['Cortisol Carrier'] += (s5q1 + s5q2);
+      scores['Craving Captive'] += Math.round(s5q2 * 0.5);
+
+      return scores;
+    }
+
+    function getRankedAvatars(scores) {
+      return Object.entries(scores).sort(function(a, b) { return b[1] - a[1]; });
+    }
+
+    // ── SUBMIT QUIZ ──
+    function submitQuiz() {
+      var name = document.getElementById('q-name').value.trim();
+      var email = document.getElementById('q-email').value.trim();
+      var phone = document.getElementById('q-phone').value.trim();
+      var valid = true;
+
+      if (!name) { setErr('q-name','err-q-name',true); valid = false; }
+      if (!isValidEmail(email)) { setErr('q-email','err-q-email',true); valid = false; }
+      if (!isValidPhone(phone)) { setErr('q-phone','err-q-phone',true); valid = false; }
+      if (!valid) {
+        document.getElementById('q-phone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      var btn = document.getElementById('quiz-submit');
+      btn.disabled = true;
+      btn.textContent = 'Calculating your results...';
+
+      // Score
+      var scores = scoreAvatars();
+      var ranked = getRankedAvatars(scores);
+      var primary = ranked[0][0];
+      var secondary = ranked[1][0];
+
+      // Collect quiz data
+      var s3 = Array.from(document.querySelectorAll('#s3-checks .checked')).map(function(el) { return el.getAttribute('data-val'); }).join(', ');
+      var s4 = Array.from(document.querySelectorAll('#s4-checks .checked')).map(function(el) { return el.getAttribute('data-val'); }).join(', ');
+      var s6 = (document.querySelector('#s6-radios .selected') || {}).getAttribute && document.querySelector('#s6-radios .selected').getAttribute('data-val') || '';
+      var s7 = (document.querySelector('#s7-radios .selected') || {}).getAttribute && document.querySelector('#s7-radios .selected').getAttribute('data-val') || '';
+
+      var payload = {
+        name: name, email: email, phone: phone,
+        primaryAvatar: primary, secondaryAvatar: secondary,
+        s1q1: document.getElementById('s1q1').value,
+        s1q2: document.getElementById('s1q2').value,
+        s1q3: document.getElementById('s1q3').value,
+        s2q1: document.getElementById('s2q1').value,
+        s2q2: document.getElementById('s2q2').value,
+        s2q3: document.getElementById('s2q3').value,
+        s5q1: document.getElementById('s5q1').value,
+        s5q2: document.getElementById('s5q2').value,
+        bodyResponse: s3,
+        triedBefore: s4,
+        goal: s6,
+        readiness: s7
+      };
+
+      // POST to placeholder webhook — swap URL before launch
+      // fetch('https://webhook.placeholder/lead-magnet', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) }).catch(function(){});
+
+      // Show results
+      setTimeout(function() { showResults(primary, secondary); }, 700);
+    }
+
+    function showResults(primary, secondary) {
+      var avatarData = AVATARS[primary] || AVATARS[DEFAULT_AVATAR];
+      var secondaryData = AVATARS[secondary] || AVATARS['Fatigue Fighter'];
+
+      document.getElementById('res-primary-name').textContent = primary;
+      document.getElementById('res-primary-badge').textContent = 'Primary Avatar — ' + primary;
+      document.getElementById('res-primary-desc').textContent = avatarData.desc;
+      document.getElementById('res-secondary-name').textContent = secondary;
+      document.getElementById('res-secondary-desc').textContent = 'influences how your primary avatar expresses itself';
+      document.getElementById('res-callout').textContent = avatarData.callout;
+
+      var protocolList = document.getElementById('res-protocol');
+      protocolList.innerHTML = '';
+      avatarData.protocol.forEach(function(item) {
+        var li = document.createElement('li');
+        li.innerHTML = '<div class="protocol-dot"></div><span>' + item + '</span>';
+        protocolList.appendChild(li);
+      });
+
+      // Hide quiz, show results
+      document.getElementById('quiz-body').style.display = 'none';
+      var results = document.getElementById('results-panel');
+      results.style.display = 'block';
+      results.style.opacity = '0';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(function() {
+        results.style.transition = 'opacity 0.5s ease';
+        results.style.opacity = '1';
+      }, 200);
+
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-pct').textContent = '100%';
+    }
+  </script>
+</body>
+</html>

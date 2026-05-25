@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Genetic Avatar Assessment — Dr. Phyllis Pobee, MD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #F4ECDF;
+      --cream-dark: #EAE0CF;
+      --mauve: #7A3B47;
+      --mauve-light: rgba(122,59,71,0.08);
+      --mauve-mid: rgba(122,59,71,0.18);
+      --charcoal: #1A1A1A;
+      --teal-cta: #2E8B7D;
+      --teal-dark: #236B5E;
+      --gold: #B8956A;
+      --gold-light: rgba(184,149,106,0.2);
+      --text: #2A2A2A;
+      --text-muted: #6B5B4E;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    .serif { font-family: 'Fraunces', serif; }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .announcement-bar {
+      background: var(--charcoal);
+      color: #d4c4b0;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: var(--cream);
+      border-bottom: 1px solid rgba(184,149,106,0.25);
+      padding: 18px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .site-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--charcoal);
+      letter-spacing: 0.01em;
+    }
+    .site-logo span { color: var(--mauve); }
+    .header-pill {
+      background: var(--mauve-light);
+      border: 1px solid rgba(122,59,71,0.3);
+      color: var(--mauve);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--cream);
+      padding: 72px 5% 80px;
+    }
+    .hero-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mauve);
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(34px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+    .hero h1 em { font-style: italic; color: var(--mauve); }
+    .hero-sub {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+      max-width: 520px;
+    }
+    .value-props { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .value-props li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--mauve);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 10px;
+    }
+    .value-props strong { color: var(--charcoal); font-weight: 600; }
+
+    /* ── OPT-IN CARD ── */
+    .optin-card {
+      background: white;
+      border-radius: 4px;
+      border: 1px solid rgba(184,149,106,0.3);
+      box-shadow: 0 4px 32px rgba(42,42,42,0.08);
+      overflow: hidden;
+    }
+    .optin-card-top {
+      background: linear-gradient(135deg, var(--mauve) 0%, #5c2833 100%);
+      padding: 28px 32px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .optin-card-top::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .optin-card-top::after {
+      content: '';
+      position: absolute;
+      bottom: -20px; left: 20px;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .avatar-preview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .avatar-chip {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 3px;
+      padding: 5px 4px;
+      text-align: center;
+      font-size: 9px;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.03em;
+      line-height: 1.3;
+    }
+    .optin-card-top h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: white;
+      margin-bottom: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .optin-card-top p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 1;
+    }
+    .optin-card-body { padding: 28px 32px 32px; }
+    .optin-field { margin-bottom: 12px; }
+    .optin-field input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid #ddd3c5;
+      border-radius: 3px;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .optin-field input:focus { border-color: var(--mauve); }
+    .optin-field input::placeholder { color: #a89485; }
+    .optin-field input.field-error-input { border-color: #c0392b; }
+    .optin-field-err { font-size: 11px; color: #c0392b; margin-top: 4px; display: none; }
+    .optin-field-err.show { display: block; }
+    .cta-btn {
+      width: 100%;
+      padding: 15px 20px;
+      background: var(--teal-cta);
+      color: white;
+      border: none;
+      border-radius: 3px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .cta-btn:hover { background: var(--teal-dark); }
+    .cta-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .trust-line {
+      font-size: 11px;
+      color: #9e8b7d;
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    /* ── 3-STEP BAR ── */
+    .steps-bar {
+      background: var(--mauve);
+      padding: 40px 5%;
+    }
+    .steps-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .step-item { text-align: center; }
+    .step-number {
+      font-family: 'Fraunces', serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .step-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.95);
+      line-height: 1.5;
+    }
+    .step-divider {
+      display: none;
+    }
+
+    /* ── FEATURED IN ── */
+    .featured-strip {
+      background: white;
+      border-top: 1px solid #e8ddd0;
+      border-bottom: 1px solid #e8ddd0;
+      padding: 24px 5%;
+    }
+    .featured-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .featured-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #b0a090;
+      white-space: nowrap;
+    }
+    .featured-logos {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+    .featured-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #9e8e80;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+    }
+
+    /* ── PROBLEM SECTION ── */
+    .problem-section {
+      background: var(--cream);
+      padding: 96px 5%;
+    }
+    .problem-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .problem-inner > .eyebrow { margin-bottom: 16px; }
+    .problem-h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(30px, 3.5vw, 46px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 56px;
+      max-width: 700px;
+    }
+    .problem-h2 em { font-style: italic; color: var(--mauve); }
+    .problem-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+    }
+    .problem-prose p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .problem-prose strong { color: var(--text); font-weight: 600; }
+    .problem-prose .fault-line {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--charcoal);
+      font-style: italic;
+      border-left: 3px solid var(--gold);
+      padding-left: 16px;
+      margin-top: 32px;
+    }
+    .switches-card {
+      background: white;
+      border: 1px solid rgba(184,149,106,0.25);
+      border-radius: 4px;
+      padding: 32px;
+    }
+    .switches-card h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mauve);
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #ede4d8;
+    }
+    .switch-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .switch-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .switch-num {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 24px;
+    }
+    .switch-text { font-size: 14px; line-height: 1.55; color: var(--text); }
+    .switch-text strong { color: var(--charcoal); font-weight: 600; }
+
+    /* ── REVEALS SECTION ── */
+    .reveals-section {
+      background: var(--charcoal);
+      padding: 96px 5%;
+    }
+    .reveals-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .reveals-section .eyebrow { color: var(--gold); margin-bottom: 16px; }
+    .reveals-h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--cream);
+      margin-bottom: 12px;
+      max-width: 700px;
+    }
+    .reveals-h2 em { font-style: italic; color: var(--gold); }
+    .reveals-sub {
+      font-size: 14px;
+      color: rgba(244,236,223,0.55);
+      font-style: italic;
+      margin-bottom: 56px;
+    }
+    .reveals-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .reveal-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(184,149,106,0.2);
+      border-radius: 4px;
+      padding: 32px;
+    }
+    .reveal-num {
+      font-family: 'Fraunces', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: rgba(184,149,106,0.3);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .reveal-card h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+    .reveal-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(244,236,223,0.6);
+    }
+
+    /* ── AUTHORITY SECTION ── */
+    .authority-section {
+      background: white;
+      padding: 96px 5%;
+    }
+    .authority-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .portrait-wrap {
+      position: relative;
+    }
+    .portrait-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #e8ddd0 0%, #d4c5b2 100%);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: #a08870;
+      text-align: center;
+      line-height: 1.5;
+      position: relative;
+      overflow: hidden;
+    }
+    .portrait-placeholder::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 60%;
+      background: linear-gradient(to top, rgba(122,59,71,0.15), transparent);
+    }
+    .portrait-badge {
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--mauve);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 2;
+    }
+    .authority-content { padding-top: 8px; }
+    .authority-content .eyebrow { margin-bottom: 10px; }
+    .authority-name {
+      font-family: 'Fraunces', serif;
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--charcoal);
+      margin-bottom: 16px;
+    }
+    .credential-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .pill {
+      background: var(--mauve-light);
+      border: 1px solid rgba(122,59,71,0.2);
+      color: var(--mauve);
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+    .authority-bio {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+    .pull-quote {
+      border-left: 3px solid var(--gold);
+      padding: 16px 20px;
+      background: var(--gold-light);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 24px;
+    }
+    .pull-quote p {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.65;
+      color: var(--charcoal);
+    }
+    .authority-close {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* ── SOCIAL PROOF ── */
+    .proof-section {
+      background: var(--mauve);
+      padding: 80px 5%;
+    }
+    .proof-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .proof-section .eyebrow { color: var(--gold); margin-bottom: 12px; }
+    .proof-h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 3vw, 40px);
+      font-weight: 300;
+      font-style: italic;
+      color: white;
+      margin-bottom: 40px;
+    }
+    .quote-block {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      padding: 32px 36px;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .quote-mark {
+      font-family: 'Fraunces', serif;
+      font-size: 60px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 0.8;
+      position: absolute;
+      top: 20px;
+      left: 28px;
+      opacity: 0.5;
+    }
+    .quote-text {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.92);
+      padding-left: 20px;
+    }
+    .quote-attr {
+      margin-top: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+      padding-left: 20px;
+    }
+    .results-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .result-col {
+      background: rgba(255,255,255,0.05);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .result-num {
+      font-family: 'Fraunces', serif;
+      font-size: 42px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .result-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 4px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .result-desc {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      background: var(--cream);
+      padding: 96px 5%;
+    }
+    .final-cta-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .final-cta .eyebrow { margin-bottom: 12px; }
+    .final-cta-h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 3.2vw, 44px);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 56px;
+      max-width: 680px;
+    }
+    .final-cta-h2 em { font-style: italic; color: var(--mauve); }
+    .final-cta-cols {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 64px;
+      align-items: start;
+    }
+    .final-reassure {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .final-checklist { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .final-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .final-checklist .check-icon { background: var(--teal-cta); flex-shrink: 0; margin-top: 1px; }
+    .trust-badges {
+      display: flex;
+      gap: 20px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #9e8e80;
+      font-weight: 500;
+    }
+    .trust-badge-icon { color: var(--teal-cta); font-size: 13px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 36px 5%;
+    }
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-disclaimer {
+      font-size: 11px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── FADE-IN ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .problem-cols { grid-template-columns: 1fr; gap: 40px; }
+      .authority-inner { grid-template-columns: 1fr; }
+      .portrait-wrap { max-width: 320px; }
+      .final-cta-cols { grid-template-columns: 1fr; }
+      .results-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 48px 5% 56px; }
+      .steps-inner { grid-template-columns: 1fr; gap: 24px; }
+      .reveals-grid { grid-template-columns: 1fr; }
+      .results-row { grid-template-columns: 1fr 1fr; }
+      .featured-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .featured-logos { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">FREE ASSESSMENT &bull; LIMITED AVAILABILITY &bull; TAKES 3 MINUTES</div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="site-logo">Dr. <span>Phyllis</span> Pobee, MD</div>
+    <div class="header-pill">Assessment Available Now</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Free Genetic Avatar Assessment</p>
+        <h1 class="serif">Find out which of the 12 Genetic Avatars&trade; is running your body &mdash; and <em>why every plan you've tried fought against it.</em></h1>
+        <p class="hero-sub">You've tracked macros. Hired trainers. Tried the shots. The plan wasn't broken — it was built for someone else's genes. This 3-minute assessment shows you which avatar you carry, and what your biology actually needs.</p>
+        <ul class="value-props">
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Your <strong>primary Genetic Avatar</strong> out of 12 possible profiles</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Which of the <strong>3 Genetic Locks</strong> is currently stalling your progress</span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>Why specific diets, workouts, and medications <strong>backfire for your avatar</strong></span>
+          </li>
+          <li>
+            <div class="check-icon">&#10003;</div>
+            <span>The exact <strong>90-day sequence</strong> built for your biology</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="hero-form">
+        <div class="optin-card">
+          <div class="optin-card-top">
+            <div class="avatar-preview">
+              <div class="avatar-chip">Craving Captive</div>
+              <div class="avatar-chip">Cortisol Carrier</div>
+              <div class="avatar-chip">Detox Bound</div>
+              <div class="avatar-chip">Fatigue Fighter</div>
+              <div class="avatar-chip">Carb Converter</div>
+              <div class="avatar-chip">Hormone Hijack</div>
+              <div class="avatar-chip">Inflammation Driver</div>
+              <div class="avatar-chip">Sleep Disruptor</div>
+              <div class="avatar-chip">Thyroid Tender</div>
+              <div class="avatar-chip">Gut Compromised</div>
+              <div class="avatar-chip">Stress Storer</div>
+              <div class="avatar-chip">Metabolic Resist.</div>
+            </div>
+            <h3>Where should we send your assessment?</h3>
+            <p>Instant access &bull; 3 minutes &bull; Instant scoring</p>
+          </div>
+          <div class="optin-card-body">
+            <form id="optin-form" onsubmit="return false;">
+              <div class="optin-field">
+                <input type="text" id="p1-name" placeholder="First Name" autocomplete="given-name">
+                <div class="optin-field-err" id="err-p1-name">Please enter your name.</div>
+              </div>
+              <div class="optin-field">
+                <input type="email" id="p1-email" placeholder="Email Address" autocomplete="email">
+                <div class="optin-field-err" id="err-p1-email">Please enter a valid email.</div>
+              </div>
+              <button class="cta-btn" id="p1-submit" onclick="submitOptin()">UNLOCK MY ASSESSMENT &rarr;</button>
+              <p class="trust-line">&#128274; We respect your privacy. No spam, ever. Unsubscribe anytime.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-STEP BAR -->
+  <div class="steps-bar">
+    <div class="steps-inner">
+      <div class="step-item fade-up">
+        <div class="step-number">01 &mdash; Step One</div>
+        <div class="step-label">Take your free Avatar Assessment (~3 min)</div>
+      </div>
+      <div class="step-item fade-up" style="transition-delay:0.1s">
+        <div class="step-number">02 &mdash; Step Two</div>
+        <div class="step-label">Get your scored results instantly</div>
+      </div>
+      <div class="step-item fade-up" style="transition-delay:0.2s">
+        <div class="step-number">03 &mdash; Step Three</div>
+        <div class="step-label">Book your Precision Health Session</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED IN -->
+  <div class="featured-strip">
+    <div class="featured-inner">
+      <span class="featured-label">As featured in</span>
+      <div class="featured-logos">
+        <span class="featured-logo">FOX NEWS</span>
+        <span class="featured-logo">yahoo!life</span>
+        <span class="featured-logo">Forbes Health</span>
+        <span class="featured-logo">Best Life</span>
+        <span class="featured-logo">NEWSWEEK</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM SECTION -->
+  <section class="problem-section">
+    <div class="problem-inner">
+      <p class="eyebrow fade-up">Why your last diet never had a chance</p>
+      <h2 class="problem-h2 fade-up">You've been told weight loss is <em>simple math.</em> Your biology disagrees.</h2>
+      <div class="problem-cols">
+        <div class="problem-prose fade-up">
+          <p>What no one tells you is that your body runs on invisible control systems. Genetic switches that determine how hungry you feel after eating, how satisfied you stay between meals. How your body responds to carbs. Whether exercise burns fat or signals your body to store more of it. How stress translates into weight.</p>
+          <p>When those switches are set against you, you can eat less than a toddler and still gain weight. That isn't a willpower problem. It's a wiring problem. And it has a name.</p>
+          <p class="fault-line">"It's called weight loss resistance. And it isn't your fault."</p>
+        </div>
+        <div class="switches-card fade-up" style="transition-delay:0.15s">
+          <h4>The Switches Running the Show</h4>
+          <ul class="switch-list">
+            <li class="switch-item">
+              <div class="switch-num">1</div>
+              <div class="switch-text"><strong>Hunger signalling</strong> — Why you can finish a meal and feel starving an hour later</div>
+            </li>
+            <li class="switch-item">
+              <div class="switch-num">2</div>
+              <div class="switch-text"><strong>Fat storage</strong> — Your body holds onto weight even when every scale metric "should" move</div>
+            </li>
+            <li class="switch-item">
+              <div class="switch-num">3</div>
+              <div class="switch-text"><strong>Insulin response</strong> — Why you crash after meals and crave sugar within the hour</div>
+            </li>
+            <li class="switch-item">
+              <div class="switch-num">4</div>
+              <div class="switch-text"><strong>Cortisol response</strong> — Why "no pain, no gain" is actually making things worse</div>
+            </li>
+            <li class="switch-item">
+              <div class="switch-num">5</div>
+              <div class="switch-text"><strong>Detoxification</strong> — How your body creates fat cells to protect vital organs</div>
+            </li>
+            <li class="switch-item">
+              <div class="switch-num">6</div>
+              <div class="switch-text"><strong>Nutrient absorption</strong> — Why your cells are screaming "eat more" even when full</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVEALS SECTION -->
+  <section class="reveals-section">
+    <div class="reveals-inner">
+      <p class="eyebrow fade-up">What your assessment will reveal</p>
+      <h2 class="reveals-h2 fade-up"><em>Three minutes of honest questions.</em> A scored result your biology has been waiting for.</h2>
+      <p class="reveals-sub fade-up">No supplement stack to buy. No miracle powder. Just the science most doctors aren't looking at.</p>
+      <div class="reveals-grid">
+        <div class="reveal-card fade-up">
+          <div class="reveal-num">01</div>
+          <h4>The 3 Genetic Locks controlling your weight</h4>
+          <p>The sequence matters. Working them in the wrong order stalls everything — and most protocols never address the sequence at all.</p>
+        </div>
+        <div class="reveal-card fade-up" style="transition-delay:0.1s">
+          <div class="reveal-num">02</div>
+          <h4>Which of the 12 Genetic Avatars&trade; you are</h4>
+          <p>Craving Captive, Cortisol Carrier, Detox Bound, Fatigue Fighter, Carb Converter, and 7 others — each with a completely different protocol.</p>
+        </div>
+        <div class="reveal-card fade-up" style="transition-delay:0.05s">
+          <div class="reveal-num">03</div>
+          <h4>The truth about Ozempic, Wegovy, and Mounjaro</h4>
+          <p>Why weight returns when you stop, what actually changes gene expression, and what those medications aren't telling you about your avatar.</p>
+        </div>
+        <div class="reveal-card fade-up" style="transition-delay:0.15s">
+          <div class="reveal-num">04</div>
+          <h4>Why generic $99 DNA tests got it wrong</h4>
+          <p>They look at a single gene. Your genes work as a network. Dr. Phyllis analyzed 250+ markers and found the patterns those cheap kits miss entirely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTHORITY SECTION -->
+  <section class="authority-section">
+    <div class="authority-inner">
+      <div class="portrait-wrap fade-up">
+        <div class="portrait-placeholder">
+          <!-- PLACEHOLDER: Replace with Dr. Phyllis portrait photo -->
+          <span style="position:relative;z-index:1;">Dr. Phyllis Portrait<br><small>Replace before launch</small></span>
+        </div>
+        <div class="portrait-badge">-100 LBS IN 12 MONTHS</div>
+      </div>
+      <div class="authority-content fade-up" style="transition-delay:0.15s">
+        <p class="eyebrow">The doctor who couldn't follow her own advice</p>
+        <h3 class="authority-name">Dr. Phyllis Pobee, MD</h3>
+        <div class="credential-pills">
+          <span class="pill">ABFM</span>
+          <span class="pill">CCFP</span>
+          <span class="pill">DABOM</span>
+          <span class="pill">Triple Board-Certified Physician</span>
+          <span class="pill">Founder, GeneLean360</span>
+        </div>
+        <p class="authority-bio">At 232 lbs, she was a triple board-certified physician in Family, Obesity, and Aesthetic Medicine who couldn't take her own advice. Not for lack of trying. She knew nutrition. She knew exercise. She knew the research. She just didn't know what her genes were telling her to eat, how to move, and how to recover — because that science wasn't taught in medical school.</p>
+        <div class="pull-quote">
+          <p>"Once I stopped following plans built for a generic body and started reading my own genetic blueprint, I lost 100 lbs in 12 months. Without surgery. Without drugs. Without guessing."</p>
+        </div>
+        <p class="authority-close">This assessment is what I wish someone had shown me twenty years ago. The science exists. Most doctors just aren't looking at it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="proof-section">
+    <div class="proof-inner">
+      <p class="eyebrow fade-up">What clients are saying</p>
+      <h2 class="proof-h2 fade-up">The piece they hadn't seen before.</h2>
+      <div class="quote-block fade-up">
+        <div class="quote-mark">&ldquo;</div>
+        <p class="quote-text">I've done everything. Keto, fasting, personal trainers, even Ozempic. Nothing stuck. Three minutes into Dr. Phyllis's assessment and I finally understood why. It wasn't my discipline — it was my avatar. I'm down 45 lbs and I haven't counted a calorie since.</p>
+        <p class="quote-attr">— Sandra D., Cortisol Carrier &bull; Atlanta, GA</p>
+      </div>
+      <div class="results-row fade-up">
+        <div class="result-col">
+          <div class="result-num">-45 lbs</div>
+          <div class="result-name">Sandra D.</div>
+          <div class="result-desc">Cortisol Carrier</div>
+        </div>
+        <div class="result-col">
+          <div class="result-num">-70 lbs</div>
+          <div class="result-name">Marcus T.</div>
+          <div class="result-desc">Carb Converter</div>
+        </div>
+        <div class="result-col">
+          <div class="result-num">-30 lbs</div>
+          <div class="result-name">Priya M.</div>
+          <div class="result-desc">Detox Bound</div>
+        </div>
+        <div class="result-col">
+          <div class="result-num">-100 lbs</div>
+          <div class="result-name">Dr. Phyllis</div>
+          <div class="result-desc">12 months, no surgery</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <p class="eyebrow fade-up">Ready for your results?</p>
+      <h2 class="final-cta-h2 fade-up">Three minutes from now, you'll know <em>exactly which avatar is running your body.</em></h2>
+      <div class="final-cta-cols">
+        <div class="fade-up">
+          <p class="final-reassure">No guessing. No generic advice. Just a scored result based on how your specific biology actually works — and a clear picture of what comes next.</p>
+          <ul class="final-checklist">
+            <li>
+              <div class="check-icon">&#10003;</div>
+              Which of the 3 Genetic Locks is blocking your progress right now
+            </li>
+            <li>
+              <div class="check-icon">&#10003;</div>
+              Which of the 12 Genetic Avatars&trade; matches how your body actually behaves
+            </li>
+            <li>
+              <div class="check-icon">&#10003;</div>
+              Why low-carb, intermittent fasting, and HIIT backfire for certain gene profiles
+            </li>
+            <li>
+              <div class="check-icon">&#10003;</div>
+              The sequence Dr. Phyllis used to lose 100 lbs after every medical method failed
+            </li>
+          </ul>
+        </div>
+        <div class="fade-up" style="transition-delay:0.15s">
+          <div class="optin-card">
+            <div class="optin-card-top" style="padding:20px 28px;">
+              <h3 style="font-size:18px;">Take the 3-minute assessment</h3>
+              <p>No spam. Instant access. Instant scoring.</p>
+            </div>
+            <div class="optin-card-body" style="padding:24px 28px 28px;">
+              <form id="optin-form-2" onsubmit="return false;">
+                <div class="optin-field">
+                  <input type="text" id="p1b-name" placeholder="First Name" autocomplete="given-name">
+                  <div class="optin-field-err" id="err-p1b-name">Please enter your name.</div>
+                </div>
+                <div class="optin-field">
+                  <input type="email" id="p1b-email" placeholder="Email Address" autocomplete="email">
+                  <div class="optin-field-err" id="err-p1b-email">Please enter a valid email.</div>
+                </div>
+                <button class="cta-btn" id="p1b-submit" onclick="submitOptin2()">GET INSTANT ACCESS &rarr;</button>
+                <div class="trust-badges" style="justify-content:center">
+                  <span class="trust-badge"><span class="trust-badge-icon">&#10003;</span> 3 minutes</span>
+                  <span class="trust-badge"><span class="trust-badge-icon">&#10003;</span> Instant scoring</span>
+                  <span class="trust-badge"><span class="trust-badge-icon">&#10003;</span> No spam, ever</span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-logo">Dr. Phyllis Pobee, MD &mdash; GeneLean360</div>
+        <div class="footer-links">
+          <a href="#">Terms</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <p class="footer-disclaimer">This assessment is for educational and informational purposes only. It is not intended to diagnose, treat, cure, or prevent any disease or health condition. Results vary. The testimonials and examples shown are exceptional results and are not intended to guarantee, promise, represent or warrant that anyone will achieve the same or similar results. Always consult with a qualified healthcare professional before starting any new health program. GeneLean360 &copy; 2026. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── SCROLL ANIMATIONS ──
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(function(el) { observer.observe(el); });
+
+    // ── VALIDATION ──
+    function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
+    function showErr(inputId, errId, show) {
+      var input = document.getElementById(inputId);
+      var err = document.getElementById(errId);
+      if (!input || !err) return;
+      if (show) { input.classList.add('field-error-input'); err.classList.add('show'); }
+      else { input.classList.remove('field-error-input'); err.classList.remove('show'); }
+    }
+
+    ['p1-name','p1-email','p1b-name','p1b-email'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', function() {
+        var errId = 'err-' + id;
+        showErr(id, errId, false);
+      });
+    });
+
+    function doSubmit(nameId, emailId, nameErrId, emailErrId, btnId) {
+      var name = document.getElementById(nameId).value.trim();
+      var email = document.getElementById(emailId).value.trim();
+      var valid = true;
+      if (!name) { showErr(nameId, nameErrId, true); valid = false; }
+      if (!isValidEmail(email)) { showErr(emailId, emailErrId, true); valid = false; }
+      if (!valid) return;
+
+      var btn = document.getElementById(btnId);
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+
+      // Store in localStorage for page 2 prefill
+      localStorage.setItem('p1_name', name);
+      localStorage.setItem('p1_email', email);
+
+      // POST to Google Sheets API
+      fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email })
+      }).catch(function() {}).finally(function() {
+        window.location.href = 'page2.html';
+      });
+    }
+
+    function submitOptin() {
+      doSubmit('p1-name','p1-email','err-p1-name','err-p1-email','p1-submit');
+    }
+    function submitOptin2() {
+      doSubmit('p1b-name','p1b-email','err-p1b-name','err-p1b-email','p1b-submit');
+    }
+  </script>
+</body>
+</html>

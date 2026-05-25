@@ -28,6 +28,7 @@ module.exports = async function handler(req, res) {
       now,
       data.name || '',
       data.email || '',
+      data.phone || '',
     ];
 
     await sheets.spreadsheets.values.append({

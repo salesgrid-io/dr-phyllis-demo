@@ -1149,15 +1149,14 @@
       localStorage.setItem('p1_email', email);
       localStorage.setItem('p1_phone', phone);
 
-      // Submit to Google Sheets
+      // Submit to Google Sheets, then navigate
       fetch('/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name, email: email, phone: phone })
-      }).catch(function() {});
-
-      // Navigate to quiz
-      window.location.href = 'page2.html';
+      }).finally(function() {
+        window.location.href = 'page2.html';
+      });
     }
 
     function submitOptin() {

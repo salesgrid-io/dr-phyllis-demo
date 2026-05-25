@@ -823,28 +823,12 @@
         </div>
       </div>
 
-      <!-- SECTION 7: Contact + Readiness -->
+      <!-- SECTION 7: Readiness -->
       <div class="q-section" data-section="7">
-        <h3 class="q-section-title">Section 7: Contact &amp; Readiness</h3>
-        <p class="q-section-sub" style="margin-bottom:28px">Almost done. So we can send your results and schedule your session.</p>
+        <h3 class="q-section-title">Section 7: Readiness</h3>
+        <p class="q-section-sub" style="margin-bottom:28px">Almost done. One last question.</p>
 
-        <div class="contact-field">
-          <label for="q-name">First Name</label>
-          <input type="text" id="q-name" placeholder="Your first name" autocomplete="given-name">
-          <div class="field-error-msg" id="err-q-name">Please enter your name.</div>
-        </div>
-        <div class="contact-field">
-          <label for="q-email">Email Address</label>
-          <input type="email" id="q-email" placeholder="Your email" autocomplete="email">
-          <div class="field-error-msg" id="err-q-email">Please enter a valid email.</div>
-        </div>
-        <div class="contact-field">
-          <label for="q-phone">Phone Number <span style="color:var(--mauve)">*</span></label>
-          <input type="tel" id="q-phone" placeholder="Your phone number" autocomplete="tel">
-          <div class="field-error-msg" id="err-q-phone">Phone number is required to book your session.</div>
-        </div>
-
-        <div style="margin-top:28px">
+        <div>
           <p class="q-section-sub" style="margin-bottom:16px;font-weight:500;color:var(--text)">When are you ready to start?</p>
           <div class="radio-group" id="s7-radios">
             <label class="radio-item" data-val="this-week">
@@ -865,6 +849,7 @@
             </label>
           </div>
         </div>
+
       </div>
 
       <!-- SUBMIT -->
@@ -890,13 +875,7 @@
   </footer>
 
   <script>
-    // ── PRE-FILL FROM LOCALSTORAGE ──
-    (function() {
-      var name = localStorage.getItem('p1_name') || '';
-      var email = localStorage.getItem('p1_email') || '';
-      if (name) document.getElementById('q-name').value = name;
-      if (email) document.getElementById('q-email').value = email;
-    })();
+    // contact data passed from page 1 via localStorage — no fields on this page
 
     // ── SLIDER LIVE UPDATE ──
     function updateSlider(el) {
@@ -931,18 +910,16 @@
       var s4checked = document.querySelectorAll('#s4-checks .checked').length > 0;
       var s6selected = document.querySelector('#s6-radios .selected') !== null;
       var s7selected = document.querySelector('#s7-radios .selected') !== null;
-      var phone = document.getElementById('q-phone').value.trim().length > 0;
 
-      // 8 sliders + s3 + s4 + s6 + s7 + phone = 13 signals
+      // 8 sliders + s3 + s4 + s6 + s7 = 12 signals
       var filled = 0;
-      sliders.forEach(function() { filled++; }); // sliders always "filled" once touched — count as baseline
+      sliders.forEach(function() { filled++; });
       if (s3checked) filled += 1;
       if (s4checked) filled += 1;
       if (s6selected) filled += 1;
       if (s7selected) filled += 1;
-      if (phone) filled += 1;
 
-      var total = sliders.length + 5;
+      var total = sliders.length + 4;
       var pct = Math.round((filled / total) * 100);
       if (pct > 100) pct = 100;
 
@@ -950,7 +927,6 @@
       document.getElementById('progress-pct').textContent = pct + '%';
     }
 
-    document.getElementById('q-phone').addEventListener('input', updateProgress);
     updateProgress();
 
     // ── SCROLL PROGRESS SPY ──
@@ -965,22 +941,6 @@
         document.getElementById('progress-fill').style.width = pct + '%';
         document.getElementById('progress-pct').textContent = pct + '%';
       }
-    });
-
-    // ── VALIDATION ──
-    function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
-    function isValidPhone(v) { return /^\d{6,15}$/.test(v.replace(/[\s\-()+.]/g, '')); }
-
-    function setErr(inputId, errId, show) {
-      var el = document.getElementById(inputId);
-      var err = document.getElementById(errId);
-      if (show) { el.classList.add('field-err'); err.classList.add('show'); }
-      else { el.classList.remove('field-err'); err.classList.remove('show'); }
-    }
-
-    ['q-name','q-email','q-phone'].forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el) el.addEventListener('input', function() { setErr(id, 'err-' + id, false); });
     });
 
     // ── AVATAR DATA ──
@@ -1087,18 +1047,10 @@
 
     // ── SUBMIT QUIZ ──
     function submitQuiz() {
-      var name = document.getElementById('q-name').value.trim();
-      var email = document.getElementById('q-email').value.trim();
-      var phone = document.getElementById('q-phone').value.trim();
-      var valid = true;
-
-      if (!name) { setErr('q-name','err-q-name',true); valid = false; }
-      if (!isValidEmail(email)) { setErr('q-email','err-q-email',true); valid = false; }
-      if (!isValidPhone(phone)) { setErr('q-phone','err-q-phone',true); valid = false; }
-      if (!valid) {
-        document.getElementById('q-phone').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-      }
+      // Read contact info collected on page 1
+      var name = localStorage.getItem('p1_name') || '';
+      var email = localStorage.getItem('p1_email') || '';
+      var phone = localStorage.getItem('p1_phone') || '';
 
       var btn = document.getElementById('quiz-submit');
       btn.disabled = true;
@@ -1110,38 +1062,7 @@
       var primary = ranked[0][0];
       var secondary = ranked[1][0];
 
-      // Collect quiz data
-      var s3 = Array.from(document.querySelectorAll('#s3-checks .checked')).map(function(el) { return el.getAttribute('data-val'); }).join(', ');
-      var s4 = Array.from(document.querySelectorAll('#s4-checks .checked')).map(function(el) { return el.getAttribute('data-val'); }).join(', ');
-      var s6 = (document.querySelector('#s6-radios .selected') || {}).getAttribute && document.querySelector('#s6-radios .selected').getAttribute('data-val') || '';
       var s7 = (document.querySelector('#s7-radios .selected') || {}).getAttribute && document.querySelector('#s7-radios .selected').getAttribute('data-val') || '';
-
-      var payload = {
-        name: name, email: email, phone: phone,
-        primaryAvatar: primary, secondaryAvatar: secondary,
-        s1q1: document.getElementById('s1q1').value,
-        s1q2: document.getElementById('s1q2').value,
-        s1q3: document.getElementById('s1q3').value,
-        s2q1: document.getElementById('s2q1').value,
-        s2q2: document.getElementById('s2q2').value,
-        s2q3: document.getElementById('s2q3').value,
-        s5q1: document.getElementById('s5q1').value,
-        s5q2: document.getElementById('s5q2').value,
-        bodyResponse: s3,
-        triedBefore: s4,
-        goal: s6,
-        readiness: s7
-      };
-
-      // POST to placeholder webhook — swap URL before launch
-      // fetch('https://webhook.placeholder/lead-magnet', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) }).catch(function(){});
-
-      // Submit to Google Sheets with full data (name + email collected on page 1, phone collected here)
-      fetch('/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, email: email, phone: phone })
-      }).catch(function() {});
 
       // Save results to localStorage for page 3
       localStorage.setItem('quiz_primary', primary);

@@ -843,6 +843,10 @@
                 <input type="email" id="p1-email" placeholder="Email Address" autocomplete="email">
                 <div class="optin-field-err" id="err-p1-email">Please enter a valid email.</div>
               </div>
+              <div class="optin-field">
+                <input type="tel" id="p1-phone" placeholder="Phone Number" autocomplete="tel">
+                <div class="optin-field-err" id="err-p1-phone">Please enter a valid phone number.</div>
+              </div>
               <button class="cta-btn" id="p1-submit" onclick="submitOptin()">UNLOCK MY ASSESSMENT &rarr;</button>
               <p class="trust-line">&#128274; We respect your privacy. No spam, ever. Unsubscribe anytime.</p>
             </form>
@@ -1066,6 +1070,10 @@
                   <input type="email" id="p1b-email" placeholder="Email Address" autocomplete="email">
                   <div class="optin-field-err" id="err-p1b-email">Please enter a valid email.</div>
                 </div>
+                <div class="optin-field">
+                  <input type="tel" id="p1b-phone" placeholder="Phone Number" autocomplete="tel">
+                  <div class="optin-field-err" id="err-p1b-phone">Please enter a valid phone number.</div>
+                </div>
                 <button class="cta-btn" id="p1b-submit" onclick="submitOptin2()">GET INSTANT ACCESS &rarr;</button>
                 <div class="trust-badges" style="justify-content:center">
                   <span class="trust-badge"><span class="trust-badge-icon">&#10003;</span> 3 minutes</span>
@@ -1105,6 +1113,7 @@
 
     // ── VALIDATION ──
     function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+    function isValidPhone(v) { return /^\d{6,15}$/.test(v.replace(/[\s\-()+.]/g, '')); }
 
     function showErr(inputId, errId, show) {
       var input = document.getElementById(inputId);
@@ -1114,39 +1123,48 @@
       else { input.classList.remove('field-error-input'); err.classList.remove('show'); }
     }
 
-    ['p1-name','p1-email','p1b-name','p1b-email'].forEach(function(id) {
+    ['p1-name','p1-email','p1-phone','p1b-name','p1b-email','p1b-phone'].forEach(function(id) {
       var el = document.getElementById(id);
       if (el) el.addEventListener('input', function() {
-        var errId = 'err-' + id;
-        showErr(id, errId, false);
+        showErr(id, 'err-' + id, false);
       });
     });
 
-    function doSubmit(nameId, emailId, nameErrId, emailErrId, btnId) {
+    function doSubmit(nameId, emailId, phoneId, nameErrId, emailErrId, phoneErrId, btnId) {
       var name = document.getElementById(nameId).value.trim();
       var email = document.getElementById(emailId).value.trim();
+      var phone = document.getElementById(phoneId).value.trim();
       var valid = true;
       if (!name) { showErr(nameId, nameErrId, true); valid = false; }
       if (!isValidEmail(email)) { showErr(emailId, emailErrId, true); valid = false; }
+      if (!isValidPhone(phone)) { showErr(phoneId, phoneErrId, true); valid = false; }
       if (!valid) return;
 
       var btn = document.getElementById(btnId);
       btn.disabled = true;
       btn.textContent = 'Loading...';
 
-      // Store in localStorage for page 2 prefill + later sheet submission
+      // Store in localStorage so page 2 can read if needed
       localStorage.setItem('p1_name', name);
       localStorage.setItem('p1_email', email);
+      localStorage.setItem('p1_phone', phone);
 
-      // Navigate to quiz — sheet submission happens on page 2 once phone is collected
+      // Submit to Google Sheets
+      fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, phone: phone })
+      }).catch(function() {});
+
+      // Navigate to quiz
       window.location.href = 'page2.html';
     }
 
     function submitOptin() {
-      doSubmit('p1-name','p1-email','err-p1-name','err-p1-email','p1-submit');
+      doSubmit('p1-name','p1-email','p1-phone','err-p1-name','err-p1-email','err-p1-phone','p1-submit');
     }
     function submitOptin2() {
-      doSubmit('p1b-name','p1b-email','err-p1b-name','err-p1b-email','p1b-submit');
+      doSubmit('p1b-name','p1b-email','p1b-phone','err-p1b-name','err-p1b-email','err-p1b-phone','p1b-submit');
     }
   </script>
 </body>
